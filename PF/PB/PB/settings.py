@@ -45,16 +45,18 @@ INSTALLED_APPS = [
     'studio',
     'classes',
     'subscriptions',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+     'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'PB.urls'
@@ -150,5 +152,5 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 GOOGLE_API_KEY = 'AIzaSyCYQ9rgbyH2mlOIun5ESSCkOuyjFIDX1NM'
 BASE_COUNTRY = 'NL'
-
+CORS_ALLOW_ALL_ORIGINS = True
 
