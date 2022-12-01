@@ -20,9 +20,9 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/studio/currlocation">Find Studios</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
-                            <Nav.Link href="/studio/currlocation">Find Studios</Nav.Link>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/profile/view">View Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="/profile/edit">

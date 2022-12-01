@@ -1,7 +1,8 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import Marker from './Marker.tsx';
 
-const Marker = ({ text }) => <div>{text}</div>;
+//const Marker = ({ text }) => <div>{text}</div>;
 
 export default function Map(studios){
     const defaultProps = {
@@ -9,7 +10,7 @@ export default function Map(studios){
             lat: 43.851316,
             lng: -79.347015
         },
-        zoom: 13
+        zoom: 12
     };
 
 
@@ -26,6 +27,7 @@ export default function Map(studios){
                         lat = {studio.location.latitude}
                         lng = {studio.location.longitude}
                         text = {studio.name}
+                        color="blue"
                     />
 
                 ))}

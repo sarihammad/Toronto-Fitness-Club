@@ -8,6 +8,7 @@ from studio.models import Location, Studio, Amenity
 from studio.serializers import LocationSerializer, StudioSerializer
 from classes.serializers import ClassSerializer, TimeSerializer
 import requests
+from rest_framework.permissions import AllowAny
 
 from geopy import distance
 from geopy import Point
@@ -18,6 +19,7 @@ class StudioView(GenericAPIView):
     Return general information of a studio.
     """
     serializer_class = StudioSerializer
+    permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
         studio = get_object_or_404(Studio, pk=kwargs['pk'])
@@ -38,6 +40,7 @@ class FindStudioByCurr(ListAPIView):
     """
     serializer_class = StudioSerializer
     paginate_by = 10
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         response = requests.get('https://api64.ipify.org?format=json').json()
@@ -103,6 +106,7 @@ class FindStudioByPostCode(ListAPIView):
     """
     serializer_class = StudioSerializer
     paginate_by = 10
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         if not self.request.data["post_code"]:

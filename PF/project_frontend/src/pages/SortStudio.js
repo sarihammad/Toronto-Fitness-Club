@@ -19,7 +19,6 @@ const SortStudio = () => {
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + String(authTokens.access)
             }
         })
         let data = await response.json()

@@ -91,6 +91,7 @@ function Register() {
                     <Form.Control
                         type="file"
                         id="avatar"
+                        accept="image/png, image/jpeg"
                         onChange={e => setAvatar(e.target.files[0])}
                     />
                 </div>

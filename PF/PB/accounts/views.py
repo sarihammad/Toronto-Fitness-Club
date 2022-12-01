@@ -7,6 +7,7 @@ from accounts.serializers import ChangePasswordSerializer, RegisterSerializer, \
     ProfileSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class ProfileView(RetrieveUpdateAPIView):
@@ -14,6 +15,7 @@ class ProfileView(RetrieveUpdateAPIView):
     View logged-in user's profile or update profile information.
     """
     serializer_class = ProfileSerializer
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_object(self):
         user = UserProfile.objects.filter(user=self.request.user)
