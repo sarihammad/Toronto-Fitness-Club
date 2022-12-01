@@ -1,6 +1,15 @@
 from rest_framework import serializers
-from studio.models import Location, Studio
+from studio.models import Location, Studio, Photo, Amenity
 
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ("photo")
+
+class AmenitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Amenity
+        fields = ("type", "quantity")
 
 class LocationSerializer(serializers.ModelSerializer):
 
@@ -11,7 +20,9 @@ class LocationSerializer(serializers.ModelSerializer):
 
 class StudioSerializer(serializers.ModelSerializer):
     location = LocationSerializer(read_only=True)
+    photo = PhotoSerializer(read_only=True, many=True)
+    amenity = AmenitySerializer(read_only=True, many=True)
 
     class Meta:
         model = Studio
-        fields = ("name", "phone_num", "location")
+        fields = ("id", "name", "phone_num", "location", "photo", "amenity")

@@ -47,11 +47,16 @@ export const AuthProvider = ({ children }) => {
             setUser(jwt_decode(data.access));
             localStorage.setItem("authTokens", JSON.stringify(data));
             setIsLoggedin(true);
-            alert("successful login")
+            //alert("successful login")
             setError(null)
             navigate("/");
+            window.location.reload();
         } else {
-            setError("No active account found with the given credentials.");
+            if (username==="" || password===""){
+                setError("Username and password fields must not be empty.")
+            }else{
+                setError("No active account found with the given credentials.");
+            }
         }
     };
 
@@ -77,15 +82,21 @@ export const AuthProvider = ({ children }) => {
             setRegisterError(null)
             navigate("/login");
         } else {
-            setRegisterError("Unable to Register. Please fill out mandatory fields.");
-            alert("Unable to Register");
+            if (username==="" || password==="" || first_name==="" || last_name==="" || email==="" || phone_num===""){
+                setRegisterError("*Please fill out mandatory fields.")
+            }else{
+                setRegisterError("Unable to Register. Please check that all fields are inputted correctly.");
+            }
+            //alert("Unable to Register");
         }
     };
 
     const logoutUser = () => {
         setAuthTokens(null);
         setUser(null);
+        console.log('I am here', localStorage.getItem('authTokens'));
         localStorage.removeItem("authTokens");
+        console.log('I am also here', localStorage.getItem('authTokens'));
         setIsLoggedin(false);
         navigate("/login");
     };

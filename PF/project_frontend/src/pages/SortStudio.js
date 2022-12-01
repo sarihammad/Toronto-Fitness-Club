@@ -2,10 +2,12 @@ import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Map from "../components/Map";
 
 const SortStudio = () => {
-    let [studioList, setStudioList] = useState([])
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    const [studioList, setStudioList] = useState([])
+    const {authTokens, logoutUser} = useContext(AuthContext)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getStudio()
@@ -23,26 +25,37 @@ const SortStudio = () => {
         let data = await response.json()
         if (response.status === 200){
             //add studio (long+lat) to a list
-            console.log(data)
-            console.log(data.results)
+            console.log("original response", data)
+            console.log("studio list", data.results)
             setStudioList(data.results)
+            setLoading(false)
         }else if(response.statusText==='Unauthorized'){
             logoutUser()
         }
 
     }
+    if (loading){
+        return (
+            <div>LOADING</div>
+        )
+    }
     return (
         <div>
-            {/*add a map with pinpoints of all studios being listed*/}
-            <h1>Sort By Studio</h1>
+            <h1>Find Studios</h1>
             <hr />
+            <p>Sorting by current location</p>
+            <Link to="/studio/postcode">Sort By Postal Code</Link>
+            <Map studios={studioList}/>
             <div>
                 {studioList.map(studio => (
                     <>
+                    <div key={studio.id}>
                     <div key={studio.name}>{studio.name}</div>
-                    <div key={studio.phone_num}>{studio.phone_num}</div>
-                    <div key={studio.location.address}>{studio.location.address}</div>
+                    <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
+                    <div key={studio.location.address}>Location: {studio.location.address}</div>
+                     <a href={"/studio/" + studio.id + "/details"}><button>Studio Details</button></a>
                     <hr />
+                    </div>
                     </>
                 ))}
             </div>

@@ -1,0 +1,27 @@
+form{
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 2px;
+    padding: 60px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    user-select: none;
+    list-style: none;
+    position: relative;
+}
+.html, body {
+    background-color: #FAFAFA;
+    margin: 0;
+    padding: 0;
+}
+.hero{
+    margin: 0;
+    height: 60vh;
+}
+h1{
+    margin: 80px;
+    padding-top: 10px;
+    text-align: center;
+}

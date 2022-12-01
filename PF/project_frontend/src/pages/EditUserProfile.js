@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import Form from 'react-bootstrap/Form';
 import {Link, useNavigate} from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 
 const EditUserProfile = () => {
@@ -58,13 +59,13 @@ const EditUserProfile = () => {
     }
     return (
         <section>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <h1>Edit Profile</h1>
                 <hr />
 
                 <div className="mb-3">
                     <label htmlFor="first_name">First Name</label>
-                    <input
+                    <Form.Control
                         type="text"
                         id="first_name"
                         onChange={e => setFirstName(e.target.value)}
@@ -73,7 +74,7 @@ const EditUserProfile = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="last_name">Last Name</label>
-                    <input
+                    <Form.Control
                         type="text"
                         id="last_name"
                         onChange={e => setLastName(e.target.value)}
@@ -82,7 +83,7 @@ const EditUserProfile = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email">Email</label>
-                    <input
+                    <Form.Control
                         type="email"
                         id="email"
                         onChange={e => setEmail(e.target.value)}
@@ -91,7 +92,7 @@ const EditUserProfile = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="phone_num">Phone Number</label>
-                    <input
+                    <Form.Control
                         type="text"
                         id="phone_num"
                         onChange={e => setPhoneNum(e.target.value)}
@@ -100,17 +101,19 @@ const EditUserProfile = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="avatar">Avatar</label>
-                    <input
+                    <Form.Control
                         type="file"
                         id="avatar"
                         onChange={e => setAvatar(e.target.files[0])}
                     />
                 </div>
-                <button>Submit</button>
+                <Button variant="primary" type="submit">
+                    Save Changes
+                </Button>
                 <br></br>
                 <br></br>
                 <Link to="/profile/view">Cancel</Link>
-            </form>
+            </Form>
         </section>
     )
 }

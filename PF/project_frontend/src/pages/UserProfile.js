@@ -33,7 +33,7 @@ const UserProfile = () => {
         <div>
             <h1>Your Profile Page</h1>
             <hr />
-            <ul>
+            <ul className="text-center">
                 <p>First name: {userprofile.first_name}</p>
                 <p>Last name: {userprofile.last_name}</p>
                 <p>Email: {userprofile.email}</p>
