@@ -35,7 +35,7 @@ const SortStudio = () => {
     }
     if (loading){
         return (
-            <div>LOADING</div>
+            <div></div>
         )
     }
     return (
@@ -43,7 +43,7 @@ const SortStudio = () => {
             <h1>Find Studios</h1>
             <hr />
             <p>Sorting by current location</p>
-            <Link to="/studio/postcode">Sort By Postal Code</Link>
+            <Link to="/studio/postcode/">Sort By Postal Code</Link>
             <Map studios={studioList}/>
             <div>
                 {studioList.map(studio => (
@@ -52,13 +52,13 @@ const SortStudio = () => {
                     <div key={studio.name}>{studio.name}</div>
                     <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
                     <div key={studio.location.address}>Location: {studio.location.address}</div>
-                     <a href={"/studio/" + studio.id + "/details"}><button>Studio Details</button></a>
+                     <Link to={"/studio/" + studio.id + "/details"}>Studio Details</Link>
                     <hr />
                     </div>
                     </>
                 ))}
             </div>
-            <Button>Next</Button>
+            {/*<Button>Next</Button>*/}
 
         </div>
     )

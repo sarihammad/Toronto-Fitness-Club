@@ -1,6 +1,6 @@
 import './App.css';
 
-import HomePage from './pages/HomePage'
+import HomePage from './pages/Homepage/HomePage'
 import LoginPage from './pages/Login/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import UserProfile from './pages/UserProfile'
@@ -25,8 +25,8 @@ function App() {
                 <Route element={<RegisterPage />} path="/register"/>
                 <Route element={<UserProfile />} path="/profile/view"/>
                 <Route element={<EditUserProfile />} path="/profile/edit"/>
-                <Route element={<SortStudio />} path="/studio/currlocation"/>
-                <Route element={<SortStudioPostCode />} path="/studio/postcode"/>
+                <Route element={<SortStudio />} path="/studio/sortby/currlocation"/>
+                <Route element={<SortStudioPostCode />} path="/studio/postcode/"/>
                 <Route element={<StudioPage />} path="/studio/:id/details"/>
             </Routes>
             </AuthProvider>

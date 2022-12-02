@@ -46,12 +46,12 @@ class Location(models.Model):
 
 
 class Photo(models.Model):
-    studio = models.ForeignKey(Studio, on_delete=models.CASCADE)
+    studio = models.ForeignKey(Studio, on_delete=models.CASCADE, related_name="photos")
     photo = models.ImageField(upload_to='images')
 
 
 class Amenity(models.Model):
-    studio = models.ForeignKey(Studio, on_delete=models.CASCADE)
+    studio = models.ForeignKey(Studio, on_delete=models.CASCADE, related_name="amenities")
     type = models.CharField(max_length=120)
     quantity = models.PositiveIntegerField()
 

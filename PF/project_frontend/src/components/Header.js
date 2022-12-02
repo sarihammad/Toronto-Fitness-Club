@@ -13,14 +13,14 @@ function Header() {
         alert("You logged out")
     }
     return (
-        <Navbar bg="light" expand="lg" className="nav">
+        <Navbar sticky="top" bg="dark" variant="dark" className="nav">
             <Container>
                 <Navbar.Brand href="/">Toronto Fitness Club</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/studio/currlocation">Find Studios</Nav.Link>
+                        <Nav.Link href="/studio/sortby/currlocation">Find Studios</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">

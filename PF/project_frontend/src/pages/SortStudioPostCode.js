@@ -16,17 +16,21 @@ const SortStudioPostCode = () => {
 
 
     let getStudio = async()=>{
-        let response = await fetch("http://127.0.0.1:8000/studio/sortby/postcode/", {
-            method: "POST",
+        // todo: adding parameters to url don't work, only works if hardcoded api call
+        // todo: postCode returns as empty in getStudio even after submitting form
+        console.log("post code:", postCode)
+        const url = (`http://127.0.0.1:8000/studio/sortby/postcode/?post_code=${postCode}`)
+        console.log("url used,", url)
+        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/postcode/?post_code=M5B 2H1`, {
+            method: "GET",
             headers:{
                 "Content-Type": "application/json",
             },
-            body:JSON.stringify({postCode})
         })
         let data = await response.json()
         if (response.status === 200){
             //add studio (long+lat) to a list
-            console.log(data)
+            console.log("sorting by postcode", data)
             console.log(data.results)
             setStudioList(data.results)
             setLoading(false)
@@ -37,7 +41,7 @@ const SortStudioPostCode = () => {
     }
     if (loading){
         return (
-            <div>This page is still in progress.</div>
+            <div></div>
         )
     }
     return (
@@ -45,8 +49,8 @@ const SortStudioPostCode = () => {
             {/*add a map with pinpoints of all studios being listed*/}
             <h1>Find Studios</h1>
             <hr />
-            <p>Sorting by Postal code</p>
-            <p><Link to="/studio/currlocation">Sort by Current Location</Link></p>
+            <p>Sorting by Postal code (M5B 2H1)</p>
+            <p><Link to="/studio/sortby/currlocation">Sort by Current Location</Link></p>
             <form onSubmit={getStudio}>
             <label htmlFor="postcode">Postal Code</label>
             <input type="text"

@@ -109,26 +109,30 @@ class FindStudioByPostCode(ListAPIView):
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        if not self.request.data["post_code"]:
-            return Response({"message": "Please enter a postal code."})
-        api_response = requests.get(
-            'https://maps.googleapis.com/maps/api/geocode/json?address={0}&key=AIzaSyCYQ9rgbyH2mlOIun5ESSCkOuyjFIDX1NM'.format(
-                self.request.data["post_code"]))
-        api_response_dict = api_response.json()
-        curr_location = Point(api_response_dict['results'][0]['geometry']['location']['lat'],
-                              api_response_dict['results'][0]['geometry']['location']['lng'])
+#         if not self.request.data["post_code"]:
+#             return Response({"message": "Please enter a postal code."})
+        if 'post_code' in self.request.GET:
+            post_code = self.request.GET['post_code']
+            if ((post_code != "")):
+                api_response = requests.get(
+                    'https://maps.googleapis.com/maps/api/geocode/json?address={0}&key=AIzaSyCYQ9rgbyH2mlOIun5ESSCkOuyjFIDX1NM'.format(
+                        post_code))
+                api_response_dict = api_response.json()
+                curr_location = Point(api_response_dict['results'][0]['geometry']['location']['lat'],
+                                      api_response_dict['results'][0]['geometry']['location']['lng'])
 
-        location_list = Location.objects.all()
-        for location in location_list:
-            studio_location = Point(location.latitude, location.longitude)
-            location.distance = distance.distance(curr_location, studio_location).kilometers
-        list_by_distance = sorted(location_list, key=operator.attrgetter('distance'))
+                location_list = Location.objects.all()
+                for location in location_list:
+                    studio_location = Point(location.latitude, location.longitude)
+                    location.distance = distance.distance(curr_location, studio_location).kilometers
+                list_by_distance = sorted(location_list, key=operator.attrgetter('distance'))
 
-        list_by_studio = []
-        for place in list_by_distance:
-            studio = StudioSerializer(place.studio)
-            list_by_studio.append(studio.data)
-        return list_by_studio
+                list_by_studio = []
+                for place in list_by_distance:
+                    studio = StudioSerializer(place.studio)
+                    list_by_studio.append(studio.data)
+                return list_by_studio
+        return []
 
 
 class FilteredStudios(ListAPIView):

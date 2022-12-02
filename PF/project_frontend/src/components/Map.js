@@ -7,8 +7,8 @@ import Marker from './Marker.tsx';
 export default function Map(studios){
     const defaultProps = {
         center: {
-            lat: 43.851316,
-            lng: -79.347015
+            lat: 43.653968,
+            lng: -79.380122
         },
         zoom: 12
     };
