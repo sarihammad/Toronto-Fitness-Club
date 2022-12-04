@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
 import Map from "../components/Map";
+import Card from 'react-bootstrap/Card';
 
 const StudioPage = () => {
     const {id} = useParams();
@@ -39,27 +40,36 @@ const StudioPage = () => {
     }
     //todo: photos don't show as images, just links
     return (
-        <div>
+        <div className="studio-list">
             <h1 key={studio.name}>{studio.name}</h1>
             <hr />
-            <h2>General Info</h2>
-            <div>
+            <div className="card-map">
+            <Card>
+                <Card.Header>General Info</Card.Header>
+                <Card.Body>
+                <div>
                 <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
                 {studio.location && <div key={studio.location.address}>Address: {studio.location.address}</div>}
                 {studio.location && <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>}
                 {studio.location && <div key={studio.location.directions}><a href={studio.location.directions} target="_blank">Get Directions</a></div>}
+                </div>
+            </Card.Body>
+            </Card>
             </div>
+            <br/>
+            <Card>
+                <Card.Header>Amenities</Card.Header>
+                <Card.Body>
+                    <div>
+                        {studio.amenities?.map(amenity => (
+                            <>
+                                <div key={amenity.type}>{amenity.type}: {amenity.quantity}</div>
+                            </>
+                        ))}
+                    </div>
+                </Card.Body>
+            </Card>
             <Map studios={[studio]}/>
-            <hr />
-            <h2>Amenities</h2>
-            <div>
-                {studio.amenities?.map(amenity => (
-                    <>
-                    <div key={amenity.type}>{amenity.type}: {amenity.quantity}</div>
-                    </>
-                ))}
-            </div>
-            <hr />
             <h2>Photos</h2>
             <div>
                 {studio.photos?.map(photo => (

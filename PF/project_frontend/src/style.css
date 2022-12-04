@@ -55,5 +55,35 @@ h1{
     position: absolute;
     border-radius: 50%;
 }
+.studio-list{
+    margin-left:220px;
+    margin-right:220px;
+    margin-top: 40px;
+}
+.sort-text{
+    margin-left:220px;
+    margin-right:220px;
+    padding: 20px;
+    border-radius: 30px;
+}
+.post-code-form{
+    margin-left:220px;
+    margin-right:220px;
+    padding: 10px;
+}
+.profile{
+    background-color: whitesmoke;
+    padding: 60px;
+    margin-right: 300px;
+    margin-left: 300px;
+    border-radius: 30px;
+}
+.map{
+    margin-left:220px;
+    margin-right:220px;
+    margin-top: 40px;
+
+}
+
 
 

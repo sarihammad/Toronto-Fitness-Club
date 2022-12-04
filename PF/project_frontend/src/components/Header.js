@@ -10,7 +10,6 @@ function Header() {
     //const {logoutUser} = useContext(AuthContext) ?? {}
     function logout(){
         localStorage.removeItem("authTokens");
-        alert("You logged out")
     }
     return (
         <Navbar sticky="top" bg="dark" variant="dark" className="nav">

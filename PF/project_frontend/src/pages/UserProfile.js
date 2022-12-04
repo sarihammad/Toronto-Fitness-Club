@@ -33,12 +33,14 @@ const UserProfile = () => {
         <div>
             <h1>Your Profile Page</h1>
             <hr />
-            <ul className="text-center">
+            <ul className="profile">
                 <p>First name: {userprofile.first_name}</p>
                 <p>Last name: {userprofile.last_name}</p>
                 <p>Email: {userprofile.email}</p>
                 <p>Phone Number: {userprofile.phone_num}</p>
                 <p>Avatar: {userprofile.avatar}</p>
+                <br/>
+                <Link to="/profile/edit"><Button variant="primary">Edit Profile</Button></Link>
             </ul>
 
         </div>

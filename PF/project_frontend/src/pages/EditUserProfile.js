@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import Form from 'react-bootstrap/Form';
 import {Link, useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 
 const EditUserProfile = () => {
@@ -16,31 +17,72 @@ const EditUserProfile = () => {
     const [email, setEmail] = useState("")
     const [phone_num, setPhoneNum] = useState("")
     const [avatar, setAvatar] = useState(null)
+    const [image, setImage] = useState(null)
+
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0])
+    };
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let form_data = new FormData();
+        if (first_name !== ''){
+            form_data.append('first_name', first_name);
+        }
+        if (last_name !== ''){
+            form_data.append('last_name', last_name);
+        }
+        if (email !== ''){
+            form_data.append('email', email);
+        }
+        if (phone_num !== ''){
+            form_data.append('phone_num', phone_num);
+        }
+        if (avatar !== null){
+            form_data.append('avatar', image);
+        }
+
+        let url = 'http://127.0.0.1:8000/accounts/profile/edit/';
+        axios.patch(url, form_data, {
+            headers: {
+                'content-type': 'multipart/form-data',
+                "Authorization": "Bearer " + String(authTokens.access)
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                navigate("/profile/view");
+            })
+            .catch(err => console.log(err))
+    };
 
 /*    useEffect(() => {
         EditProfile(first_name, last_name, email, phone_num, avatar)
     },[])*/
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) =>{
+/*    const handleSubmit = async (e) =>{
         e.preventDefault()
-        EditProfile(first_name, last_name, email, phone_num, avatar)
+        EditProfile()
     }
     const removeEmptyKeys = (item)=>{
         Object.keys(item).map((key)=>{
             if(payload[key]==="" || payload[key]===null){
                 delete payload[key]}
         })}
-    const payload = {
+    var payload = {
         "first_name": first_name,
         "last_name": last_name,
         "email":email,
         "phone_num":phone_num,
         "avatar":avatar
     }
-    removeEmptyKeys(payload)
+    removeEmptyKeys(payload)*/
 
-    let EditProfile = async(first_name, last_name, email, phone_num, avatar)=>{
+
+/*    let EditProfile = async()=>{
+        console.log("payload is", payload)
         let response = await fetch("http://127.0.0.1:8000/accounts/profile/edit/", {
             method: "PATCH",
             headers:{
@@ -56,7 +98,7 @@ const EditUserProfile = () => {
         }else if(response.statusText==='Unauthorized'){
             logoutUser()
         }
-    }
+    }*/
     return (
         <section>
             <Form onSubmit={handleSubmit}>
@@ -103,8 +145,9 @@ const EditUserProfile = () => {
                     <label htmlFor="avatar">Avatar</label>
                     <Form.Control
                         type="file"
-                        id="avatar"
-                        onChange={e => setAvatar(e.target.files[0])}
+                        id="image"
+                        accept="image/png, image/jpeg"
+                        onChange={handleImageChange}
                     />
                 </div>
                 <Button variant="primary" type="submit">

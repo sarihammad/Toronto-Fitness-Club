@@ -16,7 +16,7 @@ export default function Map(studios){
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '100%' }}>
+        <div className="map" style={{ height: '50vh'}}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyCYQ9rgbyH2mlOIun5ESSCkOuyjFIDX1NM" }}
                 defaultCenter={defaultProps.center}

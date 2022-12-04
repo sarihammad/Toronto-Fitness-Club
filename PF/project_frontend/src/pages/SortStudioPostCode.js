@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Map from "../components/Map";
+import Card from 'react-bootstrap/Card';
 
 const SortStudioPostCode = () => {
     let [studioList, setStudioList] = useState([])
@@ -12,7 +13,7 @@ const SortStudioPostCode = () => {
 
     useEffect(() => {
         getStudio()
-    },[])
+    },[postCode])
 
 
     let getStudio = async()=>{
@@ -21,7 +22,7 @@ const SortStudioPostCode = () => {
         console.log("post code:", postCode)
         const url = (`http://127.0.0.1:8000/studio/sortby/postcode/?post_code=${postCode}`)
         console.log("url used,", url)
-        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/postcode/?post_code=M5B 2H1`, {
+        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/postcode/?post_code=${postCode}`, {
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
@@ -48,28 +49,36 @@ const SortStudioPostCode = () => {
         <div>
             {/*add a map with pinpoints of all studios being listed*/}
             <h1>Find Studios</h1>
-            <hr />
-            <p>Sorting by Postal code (M5B 2H1)</p>
-            <p><Link to="/studio/sortby/currlocation">Sort by Current Location</Link></p>
-            <form onSubmit={getStudio}>
-            <label htmlFor="postcode">Postal Code</label>
+            <Map studios={studioList}/>
+            <div className="sort-text">
+                <p><Link to="/studio/sortby/currlocation">View All Studios</Link></p>
+                <h6>Sorting by Postal code</h6>
+            </div>
+            <form className="post-code-form" onSubmit={getStudio}>
+            <label htmlFor="postcode">Sort by Postal Code</label>
+                <br/>
             <input type="text"
                    id="postcode"
                    placeholder="Enter Postal Code"
                    onChange={e => setPostCode(e.target.value)}/>
-            <button>Submit</button>
             </form>
-            <Map studios={studioList}/>
-            <div>
+            <div className="studio-list">
                 {studioList.map(studio => (
                     <>
+                    <Card>
+                        <Card.Body>
                         <div key={studio.id}>
-                            <div key={studio.name}>{studio.name}</div>
+                            <div key={studio.name}><Card.Title>{studio.name}</Card.Title></div>
+                            <div key={studio.location.address}><Card.Subtitle className="mb-2 text-muted">Location: {studio.location.address}</Card.Subtitle></div>
+                            <Card.Text>
                             <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
-                            <div key={studio.location.address}>Location: {studio.location.address}</div>
-                            <a href={"/studio/" + studio.id + "/details"}><button>Studio Details</button></a>
-                            <hr />
+                            </Card.Text>
+                            <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>
                         </div>
+                            </Card.Body>
+                        <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
+                    </Card>
+                        <br/>
                     </>
                 ))}
             </div>

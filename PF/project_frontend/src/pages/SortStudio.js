@@ -1,38 +1,81 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useState, useEffect, useRef} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Map from "../components/Map";
-
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Pagination from "react-bootstrap/Pagination";
+//is this saved ?
 const SortStudio = () => {
     const [studioList, setStudioList] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
+    let [postCode, setPostCode] = useState("")
+    const [page_num_post, setPageNumPost] = useState(1)
+    const [page_num_curr, setPageNumCurr] = useState(1)
+    const [getcurr, setGetCurr] = useState(false)
+    const [getpost, setGetPost] = useState(true)
+    const [prev, setPrev] = useState(false)
+    const [next, setNext] = useState(true)
+
 
     useEffect(() => {
-        getStudio()
-    },[])
+        setPageNumPost(1)
+        getPostStudio()
+    },[postCode])
 
-
-    let getStudio = async()=>{
-        let response = await fetch("http://127.0.0.1:8000/studio/sortby/currlocation/", {
-            method: "GET",
-            headers:{
-                "Content-Type": "application/json",
-            }
-        })
-        let data = await response.json()
-        if (response.status === 200){
-            //add studio (long+lat) to a list
-            console.log("original response", data)
-            console.log("studio list", data.results)
-            setStudioList(data.results)
-            setLoading(false)
-        }else if(response.statusText==='Unauthorized'){
-            logoutUser()
+    const handleNextbtn = () => {
+        if(next){
+            getPostStudio()
+        }
+    }
+    const handlePrevbtn = () => {
+        if (prev && next){
+            setPageNumPost(page_num_post => page_num_post - 2)
+            getPostStudio()
+        }else if (!prev){
+            setPageNumPost(1)
+        }else {
+            setPageNumPost(page_num_post => page_num_post - 1)
+            getPostStudio()
         }
 
     }
+
+
+    let getPostStudio = async()=>{
+        // problem: when pages have previous and next is not null
+        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/postcode/?page=${page_num_post}&post_code=${postCode}`, {
+            method: "GET",
+            headers:{
+                "Content-Type": "application/json",
+            },
+        })
+        let data = await response.json()
+        console.log(data)
+        if (response.status === 200){
+            setStudioList(data.results)
+            setLoading(false)
+            if (data.next != null){
+                setPageNumPost(page_num_post => page_num_post + 1)
+                setNext(true)
+            }else{
+                setNext(false)
+            }
+            if (data.previous != null){
+                setPrev(true)
+            }else{
+                setPrev(false)
+            }
+        }else if(response.statusText==='Unauthorized'){
+            logoutUser()
+        }else{
+            setPageNumPost(1)
+        }
+
+    }
+
     if (loading){
         return (
             <div></div>
@@ -40,25 +83,52 @@ const SortStudio = () => {
     }
     return (
         <div>
+            <br/>
             <h1>Find Studios</h1>
-            <hr />
-            <p>Sorting by current location</p>
-            <Link to="/studio/postcode/">Sort By Postal Code</Link>
             <Map studios={studioList}/>
-            <div>
+            <Form className="post-code-form" onSubmit={e => { e.preventDefault(); }}>
+                <label htmlFor="postcode">Sort by Postal Code</label>
+                <br/>
+                <Form.Control type="text"
+                       id="postcode"
+                       placeholder="Enter Postal Code"
+                       onChange={e => setPostCode(e.target.value)}/>
+            </Form>
+            {/*<Button className="sort-text" variant="link" onClick={() => {
+                setPageNumCurr(1)
+                getStudio()
+            }}>View all Studios</Button>*/}
+            <div className="studio-list">
                 {studioList.map(studio => (
                     <>
-                    <div key={studio.id}>
-                    <div key={studio.name}>{studio.name}</div>
-                    <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
-                    <div key={studio.location.address}>Location: {studio.location.address}</div>
-                     <Link to={"/studio/" + studio.id + "/details"}>Studio Details</Link>
-                    <hr />
-                    </div>
+                    <Card>
+                        <Card.Body>
+                            <div key={studio.id}>
+                            <div key={studio.name}><Card.Title>{studio.name}</Card.Title></div>
+                            <div key={studio.location.address}><Card.Subtitle className="mb-2 text-muted">Location: {studio.location.address}</Card.Subtitle></div>
+                            <Card.Text>
+                            <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
+                            </Card.Text>
+                            <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>
+                             </div>
+                        </Card.Body>
+                        <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
+{/*                        {postCode && (
+                            <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
+                        )}*/}
+                    </Card>
+                     <br/>
                     </>
                 ))}
             </div>
-            {/*<Button>Next</Button>*/}
+            <div className="container d-flex justify-content-center">
+                <Pagination size="lg">
+                    <Pagination.Prev
+                        onClick={handlePrevbtn}/>
+                    <Pagination.Next
+                        onClick={handleNextbtn}/>
+                </Pagination>
+            </div>
 
         </div>
     )
@@ -66,21 +136,26 @@ const SortStudio = () => {
 
 export default SortStudio
 
+
 /*
-const nextPage = async() =>{
-    let {authTokens} = useContext(AuthContext)
-    let response = await fetch("http://127.0.0.1:8000/studio/sortby/currlocation/?page=2/", {
-        method: "GET",
-        headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + String(authTokens.access)
+    let getStudio = async()=>{
+        setGetCurr(true)
+        setGetPost(false)
+        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/currlocation/?page=${page_num_curr}`, {
+            method: "GET",
+            headers:{
+                "Content-Type": "application/json",
+            }
+        })
+        let data = await response.json()
+        if (response.status === 200){
+            setStudioList(data.results)
+            setLoading(false)
+        }else if(response.statusText==='Unauthorized'){
+            logoutUser()
+        }else{
+            //not found error
         }
-    })
-    let data = await response.json()
-    if (response.status === 200){
-        //add studio (long+lat) to a list
-        console.log(data)
-        console.log(data.results)
-        setStudioList(data.results)
+
     }
-}*/
+*/
