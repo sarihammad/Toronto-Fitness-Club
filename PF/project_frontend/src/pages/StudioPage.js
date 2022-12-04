@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
 import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
+import Carousel from 'react-bootstrap/Carousel';
 
 const StudioPage = () => {
     const {id} = useParams();
@@ -40,6 +41,7 @@ const StudioPage = () => {
     }
     //todo: photos don't show as images, just links
     return (
+        <div>
         <div className="studio-list">
             <h1 key={studio.name}>{studio.name}</h1>
             <hr />
@@ -69,20 +71,27 @@ const StudioPage = () => {
                     </div>
                 </Card.Body>
             </Card>
+        </div>
+
             <Map studios={[studio]}/>
             <br/>
-            <h2>Photos</h2>
-            <div>
-                {studio.photos?.map(photo => (
-                    <>
-                     <img src={`http://localhost:8000/${photo.photo}`} alt="studio-photo" className="studio-photo"/>
-                    </>
-                ))}
-            </div>
-            <hr />
-            <Link to="/studio/sortby/currlocation">Back</Link>
+            <div className="studio-list">
+                { studio.photos.length? (
+                    <Carousel variant="dark">
+                        {studio.photos?.map(photo => (
+                            <Carousel.Item>
+                                <img src={`http://localhost:8000/${photo.photo}`} alt="studio-photo" className="d-block w-100"/>
+                            </Carousel.Item>
 
+                        ))}
+                    </Carousel>
+                ):""}
+
+            <br/>
+            <Link to="/studio/sortby/currlocation">Back</Link>
+            </div>
         </div>
+
     )
 }
 
