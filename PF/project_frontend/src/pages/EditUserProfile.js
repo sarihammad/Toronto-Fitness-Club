@@ -39,7 +39,7 @@ const EditUserProfile = () => {
         if (phone_num !== ''){
             form_data.append('phone_num', phone_num);
         }
-        if (avatar !== null){
+        if (image){
             form_data.append('avatar', image);
         }
 
