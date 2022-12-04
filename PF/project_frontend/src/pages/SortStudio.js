@@ -21,39 +21,36 @@ const SortStudio = () => {
 
 
     useEffect(() => {
-        setPageNumPost(1)
-        getPostStudio()
-    },[postCode])
+        getStudio()
+    },[])
 
     const handleNextbtn = () => {
         if(next){
-            getPostStudio()
+            getStudio()
         }
     }
     const handlePrevbtn = () => {
         if (prev && next){
             setPageNumPost(page_num_post => page_num_post - 2)
-            getPostStudio()
+            getStudio()
         }else if (!prev){
             setPageNumPost(1)
         }else {
             setPageNumPost(page_num_post => page_num_post - 1)
-            getPostStudio()
+            getStudio()
         }
 
     }
-
-
-    let getPostStudio = async()=>{
-        // problem: when pages have previous and next is not null
-        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/postcode/?page=${page_num_post}&post_code=${postCode}`, {
+    let getStudio = async()=>{
+        setGetCurr(true)
+        setGetPost(false)
+        let response = await fetch(`http://127.0.0.1:8000/studio/sortby/currlocation/?page=${page_num_post}`, {
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
-            },
+            }
         })
         let data = await response.json()
-        console.log(data)
         if (response.status === 200){
             setStudioList(data.results)
             setLoading(false)
@@ -86,14 +83,8 @@ const SortStudio = () => {
             <br/>
             <h1>Find Studios</h1>
             <Map studios={studioList}/>
-            <Form className="post-code-form" onSubmit={e => { e.preventDefault(); }}>
-                <label htmlFor="postcode">Sort by Postal Code</label>
-                <br/>
-                <Form.Control type="text"
-                       id="postcode"
-                       placeholder="Enter Postal Code"
-                       onChange={e => setPostCode(e.target.value)}/>
-            </Form>
+            <br/>
+            <Link to="/studio/postcode/" className="studio-list"><Button variant="light">Sort By Postal Code</Button></Link>
             {/*<Button className="sort-text" variant="link" onClick={() => {
                 setPageNumCurr(1)
                 getStudio()
@@ -112,7 +103,7 @@ const SortStudio = () => {
                             <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>
                              </div>
                         </Card.Body>
-                        <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
+                        <Card.Footer className="text-muted" key={studio.phone_num}>Contact at {studio.phone_num}</Card.Footer>
 {/*                        {postCode && (
                             <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
                         )}*/}

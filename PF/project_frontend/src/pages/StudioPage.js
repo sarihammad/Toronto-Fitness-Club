@@ -36,10 +36,9 @@ const StudioPage = () => {
     }
     if (loading){
         return (
-            <div>LOADING</div>
+            <div></div>
         )
     }
-    //todo: photos don't show as images, just links
     return (
         <div>
         <div className="studio-list">
