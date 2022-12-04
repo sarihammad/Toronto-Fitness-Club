@@ -17,6 +17,16 @@ function Register() {
     const [image, setImage] = useState(null)
     const navigate = useNavigate();
 
+    const [errors, setErrors] = useState({
+        username: [],
+        password: [],
+        first_name: [],
+        last_name: [],
+        email: [],
+        phone_num: [],
+        avatar: []
+    });
+
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0])
@@ -31,7 +41,9 @@ function Register() {
         form_data.append('last_name', last_name);
         form_data.append('email', email);
         form_data.append('phone_num', phone_num)
-        form_data.append('avatar', image);
+        if (image){
+            form_data.append('avatar', image);
+        }
         let url = 'http://127.0.0.1:8000/accounts/register/';
         axios.post(url, form_data, {
             headers: {
@@ -42,7 +54,10 @@ function Register() {
                 console.log(res.data);
                 navigate("/login");
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err.response.data);
+                setErrors(err.response.data);
+            })
     };
 
     return (
@@ -52,6 +67,11 @@ function Register() {
             <Form.Group className="mb-3">
                 <Form.Label htmlFor="username">Username</Form.Label>
                 <Form.Control type="text" id="username" onChange={e => setUsername(e.target.value)} placeholder="*Username"/>
+                {errors.username && (
+                    <Form.Text className='text-danger' tooltip="true">
+                        {errors.username}
+                    </Form.Text>
+                )}
             </Form.Group>
             <div className="mb-3">
                 <label htmlFor="password">Password</label>
@@ -60,10 +80,9 @@ function Register() {
                     id="password"
                     onChange={e => setPassword(e.target.value)}
                     placeholder="*Password"
-                    aria-describedby="passwordHelpBlock"
                 />
-                <Form.Text id="passwordHelpBlock" muted>
-                    Your password must be at least 8 characters long.
+                <Form.Text className='text-danger' tooltip="true">
+                    {errors.password}
                 </Form.Text>
             </div>
             <Row>
@@ -76,6 +95,9 @@ function Register() {
                             onChange={e => setFirstName(e.target.value)}
                             placeholder="*First Name"
                         />
+                        <Form.Text className='text-danger' tooltip="true">
+                            {errors.first_name}
+                        </Form.Text>
                     </div>
                 </Col>
                 <Col>
@@ -87,6 +109,9 @@ function Register() {
                             onChange={e => setLastName(e.target.value)}
                             placeholder="*Last Name"
                         />
+                        <Form.Text className='text-danger' tooltip="true">
+                            {errors.last_name}
+                        </Form.Text>
                     </div>
                 </Col>
             </Row>
@@ -98,6 +123,9 @@ function Register() {
                     onChange={e => setEmail(e.target.value)}
                     placeholder="*Email"
                 />
+                <Form.Text className='text-danger' tooltip="true">
+                    {errors.email}
+                </Form.Text>
             </div>
             <div className="mb-3">
                 <label htmlFor="phone_num">Phone Number</label>
@@ -107,6 +135,9 @@ function Register() {
                     onChange={e => setPhoneNum(e.target.value)}
                     placeholder="*Phone Number"
                 />
+                <Form.Text className='text-danger' tooltip="true">
+                    {errors.phone_num}
+                </Form.Text>
             </div>
             <div className="mb-3">
                 <label htmlFor="avatar">Avatar (Optional)</label>

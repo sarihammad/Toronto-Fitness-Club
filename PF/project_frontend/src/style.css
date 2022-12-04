@@ -72,17 +72,41 @@ h1{
     padding: 10px;
 }
 .profile{
-    background-color: whitesmoke;
-    padding: 60px;
-    margin-right: 300px;
-    margin-left: 300px;
+    padding-right: 60px;
+    padding-top: 30px;
+    padding-left: 60px;
+    padding-bottom: 60px;
+    margin-right: 400px;
+    margin-left: 400px;
     border-radius: 30px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
 }
 .map{
     margin-left:220px;
     margin-right:220px;
     margin-top: 40px;
 
+}
+.avatar-box{
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    background-image: url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png");
+    background-size: cover;
+}
+.avatar{
+    height: 150px;
+    width: 150px;
+}
+.edit-button{
+    margin-left: 50vh;
+    padding: 50px;
+}
+.studio-photo{
+    height: 250px;
+    width: 250px;
 }
 
 

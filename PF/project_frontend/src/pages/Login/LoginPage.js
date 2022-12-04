@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import '../../style.css';
+import Alert from 'react-bootstrap/Alert';
 
 
 const LoginPage = () => {
@@ -61,7 +62,9 @@ const LoginPage = () => {
                 <br></br>
                 <br></br>
                 <br></br>
-                {error && <span className="alert alert-primary">{error}</span>}
+                {error && <Alert key="danger" variant="danger">
+                    {error}
+                </Alert>}
             </Form>
         </section>
     );

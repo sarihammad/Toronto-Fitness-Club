@@ -70,11 +70,12 @@ const StudioPage = () => {
                 </Card.Body>
             </Card>
             <Map studios={[studio]}/>
+            <br/>
             <h2>Photos</h2>
             <div>
                 {studio.photos?.map(photo => (
                     <>
-                        <div key={photo.photo}>{photo.photo}</div>
+                     <img src={`http://localhost:8000/${photo.photo}`} alt="studio-photo" className="studio-photo"/>
                     </>
                 ))}
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import './Homepage.css'
+import Nav from "react-bootstrap/Nav";
 
 const HomePage = () => {
     const {user} = useContext(AuthContext);
@@ -11,7 +12,12 @@ const HomePage = () => {
             <div className="hero-text">
                 <div className="main-text">Your Fitness Journey Begins Here</div>
                 <div className="subtext">Join us at The Toronto Fitness Club, at a location near you.</div>
-                <div className="button"><a href="/login">Begin your Journey</a></div>
+                {!localStorage.getItem("authTokens") && (
+                    <div className="button"><a href="/login">Begin your Journey</a></div>
+                )}
+                {localStorage.getItem("authTokens") && (
+                    <div className="button"><a href="/studio/sortby/currlocation">Find Studios Near You</a></div>
+                )}
             </div>
         </div>
         <div className="second-section">

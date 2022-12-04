@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
 
+
 const UserProfile = () => {
     let [userprofile, setUserProfile] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
@@ -29,19 +30,23 @@ const UserProfile = () => {
 
 
     }
+    // `http://localhost:8000/media/avatars/${userprofile.avatar}`
     return (
         <div>
             <h1>Your Profile Page</h1>
-            <hr />
-            <ul className="profile">
+            <br/>
+            <div className="profile">
                 <p>First name: {userprofile.first_name}</p>
                 <p>Last name: {userprofile.last_name}</p>
                 <p>Email: {userprofile.email}</p>
                 <p>Phone Number: {userprofile.phone_num}</p>
-                <p>Avatar: {userprofile.avatar}</p>
+                <p>Avatar:</p>
+                <div className="avatar-box">{ userprofile.avatar && (<img src={`http://localhost:8000/${userprofile.avatar}`} className="avatar" alt="profile-pic"/>)}</div>
                 <br/>
-                <Link to="/profile/edit"><Button variant="primary">Edit Profile</Button></Link>
-            </ul>
+                <br/>
+                <br/>
+            </div>
+            <div className="edit-button"><Link to="/profile/edit"><Button variant="primary">Edit Profile</Button></Link></div>
 
         </div>
     )
