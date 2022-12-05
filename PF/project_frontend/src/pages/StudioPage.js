@@ -79,7 +79,7 @@ const StudioPage = () => {
                     <Carousel variant="dark">
                         {studio.photos?.map(photo => (
                             <Carousel.Item>
-                                <img src={`http://localhost:8000/${photo.photo}`} alt="studio-photo" className="d-block w-100"/>
+                                <img src={`http://localhost:8000${photo.photo}`} alt="studio-photo" className="d-block w-100"/>
                             </Carousel.Item>
 
                         ))}
@@ -87,7 +87,6 @@ const StudioPage = () => {
                 ):""}
 
             <br/>
-            <Link to="/studio/sortby/currlocation">Back</Link>
             </div>
         </div>
 

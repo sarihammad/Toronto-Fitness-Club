@@ -43,7 +43,7 @@ const UserProfile = () => {
                 <p>Phone Number: {userprofile.phone_num}</p>
   {/*              <p>Avatar:</p>*/}
                 <div className="avatar-box">{ userprofile.avatar?
-                    (<img src={`http://localhost:8000/${userprofile.avatar}`} className="avatar" alt="profile-pic"/>)
+                    (<img src={`http://localhost:8000${userprofile.avatar}`} className="avatar" alt="profile-pic"/>)
                     :(<img src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"} className="avatar" alt="profile-pic"/>)}</div>
                 <br/>
                 <br/>

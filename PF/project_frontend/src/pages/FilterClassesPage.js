@@ -189,7 +189,7 @@ const FilterClassesPage = () => {
                             <Card.Text>
                                 <div key={curr_class.coach}>Coach: {curr_class.coach}</div>
                             </Card.Text>
-                            <Button variant="success" onClick={() => enrolAll(curr_class.id)}>Enrol All</Button>
+                            <Button variant="success" onClick={() => enrolAll(curr_class.id)}>Enrol All</Button>&nbsp;&nbsp;&nbsp;
                             <Button variant="danger" onClick={() => dropAll(curr_class.id)}>Drop All</Button>
                             <div className="times-list">
                                 {curr_class.times.map(curr_time => (

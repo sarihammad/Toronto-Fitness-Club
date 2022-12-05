@@ -107,7 +107,8 @@ const SortStudioPostCode = () => {
                                     <Card.Text>
                                         <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                                     </Card.Text>
-                                    <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>
+                                    <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
+                                    <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
                                 </div>
                             </Card.Body>
                             <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>
