@@ -1,10 +1,10 @@
 from django.urls import path
 
 from .views import SubscriptionView, EditCardInfoView, PaymentHistoryView, PaymentFutureView, \
-    EditSubscriptionView, CancelSubscriptionView
+    EditSubscriptionView, CancelSubscriptionView, ListMembershipView
 
 urlpatterns = [
-    # path('memberships/', ListMembershipView.as_view(), name='memberships'),
+    path('memberships/', ListMembershipView.as_view()),
     # path('memberships/edit/', EditUserMembershipView.as_view(), name='memberships'),
     path('subscribe/', SubscriptionView.as_view(), name='memberships'),
     path('card/edit/', EditCardInfoView.as_view(), name='edit-card'),

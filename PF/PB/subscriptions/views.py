@@ -21,8 +21,13 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDe
 from rest_framework.permissions import IsAuthenticated
 
 
+class ListMembershipView(ListAPIView):
+    serializer_class = MembershipSerializer
+    permission_classes = [IsAuthenticated]
 
-
+    def get_queryset(self):
+        memberships = Membership.objects.all()
+        return memberships
 
 
 class SubscriptionView(CreateAPIView):
