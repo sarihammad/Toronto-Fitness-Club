@@ -9,18 +9,21 @@ from accounts.serializers import ProfileSerializer
 from .models import Class, Time, Enrollments
 
 
-class ClassSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Class
-        fields = ("name", "description", "coach")
-
-
 class TimeSerializer(serializers.ModelSerializer):
-    time_class = ClassSerializer(read_only=True)
+    # time_class = ClassSerializer(read_only=True)
 
     class Meta:
         model = Time
-        fields = ("class_date", "start_time", "end_time", "time_class",)
+        fields = ("id", "class_date", "start_time", "end_time", "capacity")
+
+class ClassSerializer(serializers.ModelSerializer):
+    times = TimeSerializer(read_only=True)
+
+    class Meta:
+        model = Class
+        fields = ("id", "name", "description", "coach", "capacity", "times")
+
+
 
 
 class AllEnrollmentsSerializer(serializers.ModelSerializer):
