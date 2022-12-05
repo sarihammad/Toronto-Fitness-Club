@@ -20,6 +20,8 @@ function Header() {
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/studio/sortby/currlocation">Find Studios</Nav.Link>
+                        <Nav.Link href="/class/schedule">My Schedule</Nav.Link>
+                        <Nav.Link href="/class/history">My History</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
