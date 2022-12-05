@@ -13,6 +13,7 @@ from rest_framework.permissions import AllowAny
 from geopy import distance
 from geopy import Point
 
+from datetime import datetime, date
 
 class StudioView(GenericAPIView):
     """
@@ -137,6 +138,7 @@ class FindStudioByPostCode(ListAPIView):
 
 class FilteredStudios(ListAPIView):
     serializer_class = StudioSerializer
+    permission_classes = (AllowAny,)
     paginate_by = 10
 
     def get_queryset(self):
@@ -146,37 +148,45 @@ class FilteredStudios(ListAPIView):
         filtered_by_coach = Studio.objects.none()
 
         if 'studio_name' in self.request.GET:
+            if self.request.GET['studio_name'] == '':
+                filtered_by_studio_name |= Studio.objects.all()
             found_name = False
             for s in Studio.objects.all():
                 if s.name == self.request.GET['studio_name']:
                     found_name = True
                     filtered_by_studio_name |= Studio.objects.filter(name=s.name)
-            if not found_name:
+            if not found_name and self.request.GET['studio_name'] != '':
                 return Studio.objects.none()
         if 'amenity' in self.request.GET:
+            if self.request.GET['amenity'] == '':
+                filtered_by_amenity |= Studio.objects.all()
             found = False
             for a in Amenity.objects.all():
                 if a.type == self.request.GET['amenity']:
                     found = True
                     filtered_by_amenity |= Studio.objects.filter(id=a.studio.id)
-            if not found:
+            if not found and self.request.GET['amenity'] != '':
                 return Studio.objects.none()
 
         if 'class_name' in self.request.GET:
+            if self.request.GET['class_name'] == '':
+                filtered_by_class_name |= Studio.objects.all()
             found = False
             for c in Class.objects.all():
                 if c.name == self.request.GET['class_name']:
                     found = True
                     filtered_by_class_name |= Studio.objects.filter(id=c.studio.id)
-            if not found:
+            if not found and self.request.GET['class_name'] != '':
                 return Studio.objects.none()
         if 'coach' in self.request.GET:
+            if self.request.GET['coach'] == '':
+                filtered_by_coach |= Studio.objects.all()
             found = False
             for c in Class.objects.all():
                 if c.coach == self.request.GET['coach']:
                     found = True
                     filtered_by_coach |= Studio.objects.filter(id=c.studio.id)
-            if not found:
+            if not found and self.request.GET['coach'] != '':
                 return Studio.objects.none()
 
 
@@ -191,59 +201,70 @@ class FilteredStudios(ListAPIView):
 
 
 
-class FilteredClasses(ListAPIView):
+class FilteredClasses(GenericAPIView):
     serializer_class = TimeSerializer
+    permission_classes = (AllowAny,)
+    # queryset = Time.objects.none()
     paginate_by = 10
 
     def get_queryset(self):
-        filtered_by_name = Class.objects.none()
-        filtered_by_coach = Class.objects.none()
-        filtered_by_date = Class.objects.none()
-        filtered_by_start_time = Class.objects.none()
-        filtered_by_end_time = Class.objects.none()
+        filtered_by_name = Time.objects.none()
+        filtered_by_coach = Time.objects.none()
+        filtered_by_date = Time.objects.none()
+        filtered_by_start_time = Time.objects.none()
+        filtered_by_end_time = Time.objects.none()
         if 'class_name' in self.request.GET:
+            if self.request.GET['class_name'] == '':
+                filtered_by_name |= Time.objects.all()
             found_name = False
             for c in Class.objects.all():
                 if c.name == self.request.GET['class_name']:
                     found_name = True
                     filtered_by_name |= Time.objects.filter(time_class=c.id)
-            if not found_name:
+            if not found_name and self.request.GET['class_name'] != '':
                 return Time.objects.none()
 
         if 'coach' in self.request.GET:
+            if self.request.GET['coach'] == '':
+                filtered_by_coach |= Time.objects.all()            
             found_coach = False
             for c in Class.objects.all():
                 if c.coach == self.request.GET['coach']:
                     found_coach = True
                     filtered_by_coach |= Time.objects.filter(time_class=c.id)
-            if not found_coach:
+            if not found_coach and self.request.GET['coach'] != '':
                 return Time.objects.none()
 
         if 'date' in self.request.GET:
+            if self.request.GET['date'] == '':
+                filtered_by_date |= Time.objects.all()            
             found_date = False
             for t in Time.objects.all():
                 if str(t.class_date) == self.request.GET['date']:
-                    print("FOUND")
                     found_date = True
                     filtered_by_date |= Time.objects.filter(id=t.id)
-            if not found_date:
+            if not found_date and self.request.GET['date'] != '':
                 return Time.objects.none()
 
         if 'start_time' in self.request.GET:
+            if self.request.GET['start_time'] == '':
+                filtered_by_start_time |= Time.objects.all()            
             found_start_time = False
             for t in Time.objects.all():
                 if str(t.start_time) == self.request.GET['start_time']:
                     found_start_time = True
                     filtered_by_start_time |= Time.objects.filter(id=t.id)
-            if not found_start_time:
+            if not found_start_time and self.request.GET['start_time'] != '':
                 return Time.objects.none()
         if 'end_time' in self.request.GET:
+            if self.request.GET['end_time'] == '':
+                filtered_by_end_time |= Time.objects.all()            
             found_end_time = False
             for t in Time.objects.all():
                 if str(t.end_time) == self.request.GET['end_time']:
                     found_end_time = True
                     filtered_by_end_time |= Time.objects.filter(id=t.id)
-            if not found_end_time:
+            if not found_end_time and self.request.GET['end_time'] != '':
                 return Time.objects.none()
 
         filters = [filtered_by_name,
@@ -253,6 +274,40 @@ class FilteredClasses(ListAPIView):
                    filtered_by_end_time]
 
         non_empty = [filter for filter in filters if filter]
-
         return non_empty[0].intersection(*non_empty[1:])
+
+    
+    def get(self, request, *args, **kwargs):
+        get_object_or_404(Studio, pk=kwargs['pk'])
+        class_objs = Class.objects.filter(studio=kwargs['pk'])
+        time_list = []
+        for c in class_objs:
+            if c.cancel:
+                continue
+            class_json= {"id": c.id,
+                        "name": c.name,
+                        "description": c.description,
+                        "coach": c.coach,
+                        "max_capacity": c.capacity,
+                        "times": []
+                        }
+            time_objs = Time.objects.filter(time_class=c)
+            for t in time_objs:
+                if t not in self.get_queryset() or t.cancel or t.class_date < date.today() or (
+                        t.class_date == date.today() and t.start_time < datetime.now().time()):
+                    continue
+                time_json = {
+                    "id": t.id,
+                    "class_date": t.class_date,
+                    "start_time": t.start_time,
+                    "end_time": t.end_time,
+                    "space_left": c.capacity - t.capacity,
+                }
+                class_json["times"].append(time_json)
+            class_json["times"].sort(key=lambda x: x['class_date'])
+            time_list.append(class_json)
+
+        time_list.sort(key=lambda x: x['name'])
+
+        return Response(time_list)
 
