@@ -20,8 +20,9 @@ from .serializers import ClassSerializer, EnrollmentsSerializer, AllEnrollmentsS
 # Create your views here.
 
 class ClassesView(GenericAPIView):
+    queryset = Time.objects.all()
     serializer_class = ClassSerializer
-
+    permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         get_object_or_404(Studio, pk=kwargs['pk'])
         class_objs = Class.objects.filter(studio=kwargs['pk'])
@@ -29,33 +30,39 @@ class ClassesView(GenericAPIView):
         for c in class_objs:
             if c.cancel:
                 continue
+            class_json= {"id": c.id,
+                        "name": c.name,
+                        "description": c.description,
+                        "coach": c.coach,
+                        "max_capacity": c.capacity,
+                        "times": []
+                        }
             time_objs = Time.objects.filter(time_class=c)
             for t in time_objs:
                 if t.cancel or t.class_date < date.today() or (
                         t.class_date == date.today() and t.start_time < datetime.now().time()):
                     continue
-                next_t = {
+                time_json = {
+                    "id": t.id,
                     "class_date": t.class_date,
                     "start_time": t.start_time,
                     "end_time": t.end_time,
-                    "class": {
-                        "name": c.name,
-                        "description": c.description,
-                        "coach": c.coach,
-                        "max_capacity": c.capacity
-                    }
+                    "space_left": c.capacity - t.capacity,
                 }
-                time_list.append(next_t)
+                class_json["times"].append(time_json)
+            class_json["times"].sort(key=lambda x: x['class_date'])
+            time_list.append(class_json)
 
-        time_list.sort(key=lambda x: (x['class_date'], x['start_time']))
+        time_list.sort(key=lambda x: x['name'])
 
-        return Response({'classes': time_list})
+        return Response(time_list)
 
 
 class EnrolSingleView(CreateAPIView):
     serializer_class = EnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    permission_classes = [IsAuthenticated, IsSubscribed]
+    # permission_classes = [IsAuthenticated, IsSubscribed]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         class_obj = get_object_or_404(Class, id=self.kwargs['pk'])
@@ -85,7 +92,8 @@ class EnrolSingleView(CreateAPIView):
 class EnrolAllView(GenericAPIView):
     serializer_class = AllEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    permission_classes = [IsAuthenticated, IsSubscribed]
+    # permission_classes = [IsAuthenticated, IsSubscribed]
+    permission_classes = [IsAuthenticated]
 
     # def filter_queryset(self, queryset):
     #     return queryset.filter(enrolled_class=Class.objects.filter(id=self.kwargs['pk']).first())
@@ -113,7 +121,8 @@ class EnrolAllView(GenericAPIView):
 class DropSingleView(CreateAPIView):
     serializer_class = DropEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    permission_classes = [IsAuthenticated, IsSubscribed]
+    # permission_classes = [IsAuthenticated, IsSubscribed]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         class_obj = get_object_or_404(Class, id=self.kwargs['pk'])
@@ -134,7 +143,8 @@ class DropSingleView(CreateAPIView):
 class DropAllView(GenericAPIView):
     serializer_class = AllEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    permission_classes = [IsAuthenticated, IsSubscribed]
+    # permission_classes = [IsAuthenticated, IsSubscribed]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         class_obj = Class.objects.get(id=self.kwargs['pk'])
         enrolled_times = Time.objects.filter(time_class=class_obj)
@@ -151,6 +161,7 @@ class DropAllView(GenericAPIView):
 
 class ScheduleView(GenericAPIView):
     serializer_class = ClassSerializer
+    queryset = Enrollments.objects.all()
     permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         user_enrollments = Enrollments.objects.filter(enrolled_user=request.user)
@@ -178,7 +189,7 @@ class ScheduleView(GenericAPIView):
 
         time_list.sort(key=lambda x: (x['class_date'], x['start_time']))
 
-        return Response({'schedule': time_list})
+        return Response(time_list)
 
 
 class HistoryView(GenericAPIView):
@@ -212,5 +223,5 @@ class HistoryView(GenericAPIView):
 
         time_list.sort(key=lambda x: (x['class_date'], x['start_time']))
 
-        return Response({'history': time_list})
+        return Response(time_list)
 
