@@ -85,6 +85,9 @@ const SortStudio = () => {
             <Map studios={studioList}/>
             <br/>
             <Link to="/studio/postcode/" className="studio-list"><Button variant="light">Sort By Postal Code</Button></Link>
+            <br/>
+            <br/>
+            <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
             {/*<Button className="sort-text" variant="link" onClick={() => {
                 setPageNumCurr(1)
                 getStudio()
@@ -101,6 +104,7 @@ const SortStudio = () => {
                             <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                             </Card.Text>
                             <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>
+                            <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
                              </div>
                         </Card.Body>
                         <Card.Footer className="text-muted" key={studio.phone_num}>Contact at {studio.phone_num}</Card.Footer>
