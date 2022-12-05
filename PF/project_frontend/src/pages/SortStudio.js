@@ -82,9 +82,11 @@ const SortStudio = () => {
         <div>
             <br/>
             <h1>Find Studios</h1>
+            <h6 className="studio-list">Sorting by Current Location</h6>
             <Map studios={studioList}/>
             <br/>
             <Link to="/studio/postcode/" className="studio-list"><Button variant="light">Sort By Postal Code</Button></Link>
+            <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>
             <br/>
             <br/>
             <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>

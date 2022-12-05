@@ -85,6 +85,7 @@ const SortStudioPostCode = () => {
         <div>
             <br/>
             <h1>Find Studios</h1>
+            <h6 className="studio-list">Sorting by Postal Code</h6>
             <Map studios={studioList}/>
             <Form className="post-code-form" onSubmit={e => { e.preventDefault(); }}>
                 <label htmlFor="postcode">Sort by Postal Code</label>
@@ -95,6 +96,7 @@ const SortStudioPostCode = () => {
                               onChange={e => setPostCode(e.target.value)}/>
             </Form>
             <Link to="/studio/sortby/currlocation" className="studio-list"><Button variant="light">View All Studios</Button></Link>
+            <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>
 
             <div className="studio-list">
                 {studioList.map(studio => (

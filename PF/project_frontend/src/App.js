@@ -17,6 +17,7 @@ import HistoryPage from "./pages/HistoryPage";
 import FilterStudiosPage from "./pages/FilterStudiosPage";
 import FilterClassesPage from "./pages/FilterClassesPage";
 import SortStudioPostCode from "./pages/SortStudioPostCode";
+import SortStudioMap from "./pages/SortStudioMap";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<EditUserProfile />} path="/profile/edit"/>
                 <Route element={<SortStudio />} path="/studio/sortby/currlocation"/>
                 <Route element={<SortStudioPostCode />} path="/studio/postcode/"/>
+                <Route element={<SortStudioMap />} path="/studio/map"/>
                 <Route element={<StudioPage />} path="/studio/:id/details"/>
                 <Route element={<ClassesPage />} path="/studio/:id/classes"/>
                 <Route element={<SchedulePage />} path="/class/schedule"/>

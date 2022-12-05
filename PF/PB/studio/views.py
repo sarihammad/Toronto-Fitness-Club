@@ -42,7 +42,6 @@ class FindStudioByCurr(ListAPIView):
     serializer_class = StudioSerializer
     paginate_by = 10
     permission_classes = (AllowAny,)
-
     def get_queryset(self):
         response = requests.get('https://api64.ipify.org?format=json').json()
         ip_address = response["ip"]
@@ -77,21 +76,27 @@ class FindStudioByPoint(ListAPIView):
     """
     serializer_class = StudioSerializer
     paginate_by = 10
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        curr_location = Point(self.request.data["latitude"], self.request.data["longitude"])
+        if 'latitude' in self.request.GET:
+            if 'longitude' in self.request.GET:
+                latitude = self.request.GET['latitude']
+                longitude = self.request.GET['longitude']
+                curr_location = Point(latitude, longitude)
 
-        location_list = Location.objects.all()
-        for location in location_list:
-            studio_location = Point(location.latitude, location.longitude)
-            location.distance = distance.distance(curr_location, studio_location).kilometers
-        list_by_distance = sorted(location_list, key=operator.attrgetter('distance'))
+                location_list = Location.objects.all()
+                for location in location_list:
+                    studio_location = Point(location.latitude, location.longitude)
+                    location.distance = distance.distance(curr_location, studio_location).kilometers
+                list_by_distance = sorted(location_list, key=operator.attrgetter('distance'))
 
-        list_by_studio = []
-        for place in list_by_distance:
-            studio = place.studio
-            list_by_studio.append(studio)
-        return list_by_studio
+                list_by_studio = []
+                for place in list_by_distance:
+                    studio = place.studio
+                    list_by_studio.append(studio)
+                return list_by_studio
+        return []
 
 
 class FindStudioByPostCode(ListAPIView):
