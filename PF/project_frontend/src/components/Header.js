@@ -20,14 +20,14 @@ function Header() {
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
                         <NavDropdown title="Find Studios" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/studio/sortby/currlocation">Sort by Current Location</NavDropdown.Item>
                             <NavDropdown.Item href="/studio/postcode/">Sort by Postal Code</NavDropdown.Item>
                             <NavDropdown.Item href="/studio/map">Sort by Pinpoint</NavDropdown.Item>
+                            <NavDropdown.Item href="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="/class/schedule">My Schedule</Nav.Link>
-                        <Nav.Link href="/class/history">My History</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
+                            <Nav.Link href="/class/schedule">My Schedule</Nav.Link>
+                            <Nav.Link href="/class/history">My History</Nav.Link>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/profile/view">View Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="/profile/edit">
