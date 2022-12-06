@@ -107,6 +107,7 @@ function SortStudioMap () {
     //renderer
         return (
             <div>
+                <br/>
             <h1>Find Studios</h1>
                 <h6 className="studio-list">Set pinpoint on map to sort studios:</h6>
 
@@ -152,7 +153,7 @@ function SortStudioMap () {
                                         <Card.Text>
                                             <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                                         </Card.Text>
-                                        <Link to={"/studio/" + studio.id + "/details"}><Button variant="btn btn-outline-dark">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
+                                        <Link to={"/studio/" + studio.id + "/details"}><Button variant="outline-secondary">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
                                         <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
                                     </div>
                                 </Card.Body>

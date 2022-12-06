@@ -12,7 +12,8 @@ form{
     position: relative;
 }
 .html, body {
-    background-color: #FAFAFA;
+    background-color: whitesmoke;
+    color: #3c3c3c;
     margin: 0;
     padding: 0;
 }
@@ -20,6 +21,7 @@ h1{
     margin: 80px;
     padding-top: 10px;
     text-align: center;
+    color: #3c3c3c;
 }
 
 .marker {
@@ -154,4 +156,9 @@ h1{
 }
 .map-page{
     margin-top:65vh;
+}
+.btn-primary{
+    background-color: #d85c27 !important;
+    outline: none !important;
+    border:none !important;
 }

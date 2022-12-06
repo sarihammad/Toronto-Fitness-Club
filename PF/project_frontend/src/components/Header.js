@@ -12,7 +12,7 @@ function Header() {
         localStorage.removeItem("authTokens");
     }
     return (
-        <Navbar sticky="top" bg="dark" variant="dark" className="nav">
+        <Navbar sticky="top"  variant="dark" className="nav color-nav">
             <Container>
                 <Navbar.Brand href="/">Toronto Fitness Club</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
