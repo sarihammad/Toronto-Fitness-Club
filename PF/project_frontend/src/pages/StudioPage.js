@@ -43,8 +43,12 @@ const StudioPage = () => {
         <div>
         <div className="studio-list">
             <h1 key={studio.name}>{studio.name}</h1>
-            <hr />
+            <br/>
             <div className="card-map">
+                <div className="d-grid gap-2">
+                <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">View Classes for this Studio</Button></Link>
+                </div>
+                <br/>
             <Card>
                 <Card.Header>General Info</Card.Header>
                 <Card.Body>
@@ -73,10 +77,10 @@ const StudioPage = () => {
         </div>
 
             <Map studios={[studio]}/>
-            <br/>
+            <h5 className="studio-list">Photos</h5>
             <div className="studio-list">
                 { studio.photos.length? (
-                    <Carousel variant="dark">
+                    <Carousel variant="dark" className="studio-list">
                         {studio.photos?.map(photo => (
                             <Carousel.Item>
                                 <img src={`http://localhost:8000${photo.photo}`} alt="studio-photo" className="d-block w-100"/>

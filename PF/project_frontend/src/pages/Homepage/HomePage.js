@@ -16,7 +16,7 @@ const HomePage = () => {
                     <div className="button"><a href="/login">Begin your Journey</a></div>
                 )}
                 {localStorage.getItem("authTokens") && (
-                    <div className="button"><a href="/studio/sortby/currlocation">Find Studios Near You</a></div>
+                    <div className="button"><a href="/studio/postcode/">Find Studios Near You</a></div>
                 )}
             </div>
         </div>
@@ -34,6 +34,12 @@ const HomePage = () => {
             </div>
 
         </div>
+            <div className="third-section">
+                <div className="hero-text">
+                    <div className="main-text-third">Explore Our Subscription Plans</div>
+                    <div className="subtext-second"></div>
+                </div>
+            </div>
         </>
     )
 }

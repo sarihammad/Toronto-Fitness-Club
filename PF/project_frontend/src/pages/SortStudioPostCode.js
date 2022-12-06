@@ -95,8 +95,11 @@ const SortStudioPostCode = () => {
                               placeholder="Enter Postal Code"
                               onChange={e => setPostCode(e.target.value)}/>
             </Form>
-            <Link to="/studio/sortby/currlocation" className="studio-list"><Button variant="light">View All Studios</Button></Link>
-            <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>
+{/*            <Link to="/studio/sortby/currlocation" className="studio-list"><Button variant="light">View All Studios</Button></Link>
+            <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>*/}
+{/*            <br/>
+            <br/>*/}
+            <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
 
             <div className="studio-list">
                 {studioList.map(studio => (
@@ -109,7 +112,7 @@ const SortStudioPostCode = () => {
                                     <Card.Text>
                                         <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                                     </Card.Text>
-                                    <Link to={"/studio/" + studio.id + "/details"}><Button variant="primary">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
+                                    <Link to={"/studio/" + studio.id + "/details"}><Button variant="btn btn-outline-dark">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
                                     <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
                                 </div>
                             </Card.Body>
