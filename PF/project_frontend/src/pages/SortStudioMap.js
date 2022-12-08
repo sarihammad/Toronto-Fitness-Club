@@ -107,8 +107,9 @@ function SortStudioMap () {
     //renderer
         return (
             <div>
-                <br/>
-            <h1>Find Studios</h1>
+                <div className="studio-upper"><h5 className="h2-text">Find Studios: Pinpoint on Map</h5></div>
+{/*                <br/>
+            <h1>Find Studios</h1>*/}
                 <h6 className="studio-list">Set pinpoint on map to sort studios:</h6>
 
             <Map

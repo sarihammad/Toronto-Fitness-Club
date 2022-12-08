@@ -80,9 +80,10 @@ const SortStudio = () => {
     }
     return (
         <div>
-            <br/>
+            <div className="studio-upper"><h5 className="h2-text">Find Studios Near You: Viewing All</h5></div>
+{/*            <br/>
             <h1>Find Studios</h1>
-            <h6 className="studio-list">Viewing All Studios</h6>
+            <h6 className="studio-list">Viewing All Studios</h6>*/}
             <Map studios={studioList}/>
             <br/>
 {/*            <Link to="/studio/postcode/" className="studio-list"><Button variant="light">Sort By Postal Code</Button></Link>

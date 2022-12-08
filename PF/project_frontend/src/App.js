@@ -17,6 +17,7 @@ import HistoryPage from "./pages/HistoryPage";
 import FilterStudiosPage from "./pages/FilterStudiosPage";
 import FilterClassesPage from "./pages/FilterClassesPage";
 import SortStudioPostCode from "./pages/SortStudioPostCode";
+import CreditCardPage from "./pages/CreditCardPage";
 import SortStudioMap from "./pages/SortStudioMap";
 import SubscriptionsPage from './pages/SubscriptionsPage';
 
@@ -27,6 +28,7 @@ function App() {
             <Header/>
             <AuthProvider>
             <Routes>
+                <Route element={<CreditCardPage />} path="/subscriptions/subscribe/"/>
                 <Route element={<HomePage />} path="/" exact/>
                 <Route element={<LoginPage />} path="/login"/>
                 <Route element={<RegisterPage />} path="/register"/>
@@ -41,6 +43,7 @@ function App() {
                 <Route element={<HistoryPage />} path="/class/history"/>
                 <Route element={<FilterStudiosPage />} path="/studio/filter"/>
                 <Route element={<FilterClassesPage />} path="/studio/:id/classes/filter"/>
+
                 <Route element={<SubscriptionsPage />} path="/subscriptions"/>
             </Routes>
             </AuthProvider>

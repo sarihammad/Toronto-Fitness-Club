@@ -83,9 +83,10 @@ const SortStudioPostCode = () => {
     }
     return (
         <div>
-            <br/>
+            <div className="studio-upper"><h5 className="h2-text">Find Studios: Sort By Postal Code</h5></div>
+            {/*<br/>
             <h1>Find Studios</h1>
-            <h6 className="studio-list">Sorting by Postal Code</h6>
+            <h6 className="studio-list">Sorting by Postal Code</h6>*/}
             <Map studios={studioList}/>
             <Form className="post-code-form" onSubmit={e => { e.preventDefault(); }}>
                 <label htmlFor="postcode">Sort by Postal Code</label>
@@ -104,7 +105,7 @@ const SortStudioPostCode = () => {
             <div className="studio-list">
                 {studioList.map(studio => (
                     <>
-                        <Card>
+                        <Card >
                             <Card.Body>
                                 <div key={studio.id}>
                                     <div key={studio.name}><Card.Title>{studio.name}</Card.Title></div>
