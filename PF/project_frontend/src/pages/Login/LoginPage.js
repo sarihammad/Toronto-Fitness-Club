@@ -6,6 +6,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import '../../style.css';
 import Alert from 'react-bootstrap/Alert';
 import {Link} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 
 const LoginPage = () => {
@@ -14,6 +16,8 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     let {error} = useContext(AuthContext)
     let {loginUser} = useContext(AuthContext)
+    const state = useLocation().search;
+
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.currentTarget;
@@ -22,11 +26,9 @@ const LoginPage = () => {
             event.stopPropagation();
         }
 
-        //setValidated(true);
-        /*const username = e.target.username.value;
-        const password = e.target.password.value;*/
         console.log("logging in with", username, password)
-        loginUser(username, password);
+        console.log("login ", state)
+        loginUser(username, password, state);
     };
 
     return (

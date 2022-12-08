@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 const AuthContext = createContext();
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
-    const loginUser = async (username, password) => {
+    const loginUser = async (username, password, state) => {
         const response = await fetch("http://127.0.0.1:8000/accounts/login/", {
             method: "POST",
             headers: {
@@ -49,7 +49,15 @@ export const AuthProvider = ({ children }) => {
             setIsLoggedin(true);
             //alert("successful login")
             setError(null)
-            navigate("/");
+
+            console.log("auth ", state)
+            if (state === "") {
+                navigate("/");
+            }else {
+                var redirect = state.split("=")[1]
+                navigate(redirect);
+            }
+
             window.location.reload();
         } else {
             if (username==="" || password===""){
@@ -146,10 +154,3 @@ export const AuthProvider = ({ children }) => {
     );
 
 };
-/*
-const userprofile = await fetch("http://127.0.0.1:8000/accounts/profile/view/", {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem('authTokens')}`
-    }
-})*/

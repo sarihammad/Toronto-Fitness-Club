@@ -11,34 +11,9 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import {Link} from "react-router-dom";
 
 
+
 const HomePage = () => {
     const {user} = useContext(AuthContext);
-    // let [setSubscription] = useState([])
-
-    // useEffect(() => {
-    //     getSubscriptionInfo()
-    // },[])
-
-    // let getSubscriptionInfo = async() => {
-    //     let response = await fetch(`http://127.0.0.1:8000/subscriptions/memberships/`, {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         }
-    //     })
-    //     let data = await response.json()
-    //     if (response.status === 200){
-    //         console.log(data)
-    //         setSubscription(data)
-    //     }
-    // }
-
-    // const Card = (props) => (
-    //     <div className="subscription_card">
-    //         <h2>{ props.membership }</h2>
-    //         <p>{ props.price }</p>
-    //     </div>
-    // );
 
     return (
         <>
@@ -78,6 +53,7 @@ const HomePage = () => {
                         Come, make Toronto fit!
                     </div>
                     <div className="button" style={{marginLeft: "-70px"}}><Link to="/subscriptions">View Subscription Plans</Link></div>
+
                     
                 </div>
             </div>

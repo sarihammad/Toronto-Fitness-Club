@@ -1,10 +1,12 @@
 import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import Button from "react-bootstrap/Button";
-import {Link, useParams, Navigate} from "react-router-dom";
+import {Link, useParams, useLocation, NavLink} from "react-router-dom";
+import CardContainer from "react-card-container";
 import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
 import Carousel from 'react-bootstrap/Carousel';
+import './SubscriptionsPage.css'
 
 const SubscriptionsPage = () => {
     const {id} = useParams();
@@ -12,6 +14,7 @@ const SubscriptionsPage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext)
     const [authenticated, setauthenticated] = useState(null);
     const [loginError, setLoginError] = useState(false)
+    const location = useLocation();
 
     useEffect(() => {
         getSubscriptionInfo()
@@ -50,14 +53,45 @@ const SubscriptionsPage = () => {
     }
 
     var frequency_dict = {1: "Daily", 7: "Weekly", 30: "Monthly", 365: "Yearly"};
+    var redirect_path = "/login?redirect=subscriptions"
 
 
-    // const Card = (props) => (
-    //     <div className="subscription_card">
-    //         <h2>{ props.membership }</h2>
-    //         <p>{ props.price }</p>
-    //     </div>
-    // );
+    const Card = (props) => (
+        // <Card>
+        //     <Card.Body>
+                <div className="subscription_card">
+                    <div className="card_data">
+                        <div key={ props.id }>
+                            <div key={ props.membership }><h3>{ frequency_dict[props.membership] }</h3></div>
+                            <div key={ props.membership }><h5>${ props.price }/{ props.membership } days</h5></div>
+                            <br />
+                            <hr />
+                            {localStorage.getItem("authTokens") && (
+                                <Link to={ "/subscriptions/subscribe" }><Button variant="primary">Subscribe</Button></Link>
+                            )}
+                            {!localStorage.getItem("authTokens") && (
+                                // <NavLink to="/login" state={{ prev: location.pathname }}><Button variant="primary">Subscribe</Button></NavLink>
+                                <Link to={ redirect_path }><Button variant="primary">Subscribe</Button></Link>
+
+                            )}
+                        </div>
+                    </div>
+                </div>
+        //     </Card.Body>                                
+        // </Card>
+    );
+
+
+    const CardContainer = (props) => (
+        <div className="subscription_container">
+          {
+            props.cards.map((card) => (
+              <Card membership={ card.membership }
+                price={ card.price } />
+            ))
+          }
+        </div>
+      );
 
 
     return (
@@ -65,7 +99,9 @@ const SubscriptionsPage = () => {
             <br/>
             <h1>Subscriptions</h1>
             <br/>
-            <div className="subscription_container studio-list">
+            {/* <div className="subscription_container studio-list"> */}
+            {/* <div className="subscription_container">
+
 
                 {
                     subscriptionsList.map(subscription => (
@@ -76,7 +112,7 @@ const SubscriptionsPage = () => {
                                         <div key={ subscription.membership }><Card.Title>{ frequency_dict[subscription.membership] }</Card.Title></div>
                                         <div key={ subscription.membership }><Card.Title>${ subscription.price }/{ subscription.membership } days</Card.Title></div>
                                         {localStorage.getItem("authTokens") && (
-                                            <Link to={ "/" }><Button variant="primary">Subscribe</Button></Link>
+                                            <Link to={ "/subscriptions/subscribe" }><Button variant="primary">Subscribe</Button></Link>
                                         )}
                                         {!localStorage.getItem("authTokens") && (
                                             <Link to={ "/login" }><Button variant="primary">Subscribe</Button></Link>
@@ -91,7 +127,10 @@ const SubscriptionsPage = () => {
                 }
                 <div key={loginError}>{loginError}</div>
 
-            </div>
+
+            </div> */}
+            <CardContainer cards={ subscriptionsList }/>
+
         </div>
 
     )
