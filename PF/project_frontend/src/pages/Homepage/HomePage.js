@@ -30,7 +30,7 @@ const HomePage = () => {
             </div>
                 <div className="subtext-second"> We offer classes ranging from HITT to yoga, to spin, in studios all across Toronto.
                 </div>
-                <div className="button"><a href="/studio/sortby/currlocation">Find Studios Near You</a></div>
+                <div className="button" style={{marginLeft: "-70px"}}><a href="/studio/sortby/currlocation">Find Studios Near You</a></div>
             </div>
 
         </div>

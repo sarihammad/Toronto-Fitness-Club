@@ -116,7 +116,7 @@ h1{
     height:400px;
 }
 .profile-container{
-    background-color: #2e353d;
+    background-color: #0A1819;
     width: 100%;
     height: auto;
     background-size: cover;
@@ -130,7 +130,7 @@ h1{
     object-fit: cover;
     height: 20vh;
     width: 100%;
-    background-image: url("https://t4.ftcdn.net/jpg/03/17/72/47/360_F_317724775_qHtWjnT8YbRdFNIuq5PWsSYypRhOmalS.jpg");
+    background-image: url("https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 }
 
 .classes-list{
@@ -162,3 +162,34 @@ h1{
     outline: none !important;
     border:none !important;
 }
+.studio-upper{
+    height: 8vh;
+    width: 100vw;
+    background-color: #d85c27;
+    color: white;
+}
+.h2-text{
+    padding-top: 17px;
+    text-align: center;
+}
+.studio-name{
+    height: 33vh;
+    width: 100vw;
+    background-image: url("https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    color: white;
+    padding-top: 15px;
+    text-align: center;
+}
+.studio-text{
+    padding-top: 35px;
+    text-align: center;
+    color: white;
+}
+.studio-background{
+    background-color: white;
+}
+

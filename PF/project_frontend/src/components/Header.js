@@ -12,7 +12,7 @@ function Header() {
         localStorage.removeItem("authTokens");
     }
     return (
-        <Navbar sticky="top"  bg="dark" variant="dark">
+        <Navbar sticky="top"  expand="lg" bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="/">Toronto Fitness Club</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,6 +28,7 @@ function Header() {
                             <>
                             <Nav.Link href="/class/schedule">My Schedule</Nav.Link>
                             <Nav.Link href="/class/history">My History</Nav.Link>
+                            <Nav.Link href="/subscriptions/subscribe/">Card Page</Nav.Link>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/profile/view">View Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="/profile/edit">

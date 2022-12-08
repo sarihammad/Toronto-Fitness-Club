@@ -40,17 +40,20 @@ const StudioPage = () => {
         )
     }
     return (
-        <div>
+        <div className="studio-background">
+            <div key={studio.name} className="studio-name"><h1 className="studio-text">{studio.name}</h1>
+                <br/>
+            <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">View Classes for this Studio</Button></Link>
+            </div>
         <div className="studio-list">
-            <h1 key={studio.name}>{studio.name}</h1>
-            <br/>
+{/*            <h1 key={studio.name}>key={studio.name}</h1>
+            <br/>*/}
             <div className="card-map">
                 <div className="d-grid gap-2">
-                <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">View Classes for this Studio</Button></Link>
                 </div>
                 <br/>
             <Card>
-                <Card.Header>General Info</Card.Header>
+                <Card.Header style={{backgroundColor: '#3F383F', color: 'white'}}>General Info</Card.Header>
                 <Card.Body>
                 <div>
                 <div key={studio.phone_num}>Phone Number: {studio.phone_num}</div>
@@ -63,7 +66,7 @@ const StudioPage = () => {
             </div>
             <br/>
             <Card>
-                <Card.Header>Amenities</Card.Header>
+                <Card.Header style={{backgroundColor: '#3F383F', color: 'white'}}>Amenities</Card.Header>
                 <Card.Body>
                     <div>
                         {studio.amenities?.map(amenity => (
