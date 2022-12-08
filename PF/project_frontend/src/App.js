@@ -18,6 +18,7 @@ import FilterStudiosPage from "./pages/FilterStudiosPage";
 import FilterClassesPage from "./pages/FilterClassesPage";
 import SortStudioPostCode from "./pages/SortStudioPostCode";
 import SortStudioMap from "./pages/SortStudioMap";
+import SubscriptionsPage from './pages/SubscriptionsPage';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route element={<HistoryPage />} path="/class/history"/>
                 <Route element={<FilterStudiosPage />} path="/studio/filter"/>
                 <Route element={<FilterClassesPage />} path="/studio/:id/classes/filter"/>
+                <Route element={<SubscriptionsPage />} path="/subscriptions"/>
             </Routes>
             </AuthProvider>
         </Router>

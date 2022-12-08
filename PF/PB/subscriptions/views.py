@@ -18,15 +18,26 @@ from subscriptions.serializers import MembershipSerializer, \
 
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, \
     RetrieveUpdateAPIView, UpdateAPIView, GenericAPIView, DestroyAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class ListMembershipView(ListAPIView):
     serializer_class = MembershipSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny,]
 
     def get_queryset(self):
         memberships = Membership.objects.all()
+
+        # membership_list = []
+        # for i in memberships:
+        #     membership_json = {
+        #             "membership": i.membership,
+        #             "price": i.price,
+        #             "frequency": i.get_membership_display()
+        #         }
+        #     membership_list.append(membership_json)
+        # return membership_list
+        # frequency = membership.get_membership_display()
         return memberships
 
 
