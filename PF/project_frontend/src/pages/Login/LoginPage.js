@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import '../../style.css';
 import Alert from 'react-bootstrap/Alert';
+import {Link} from "react-router-dom";
 
 
 const LoginPage = () => {
@@ -61,10 +62,10 @@ const LoginPage = () => {
                 </Button>
                 <br></br>
                 <br></br>
-                <br></br>
                 {error && <Alert key="danger" variant="danger">
                     {error}
                 </Alert>}
+                <p className="register"> Don't have account? <Link style={{textDecoration: 'none', color: '#d85c27'}} to="/register">Create an account</Link></p>
             </Form>
         </section>
     );

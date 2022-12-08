@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -149,9 +149,9 @@ function Register() {
                 />
             </div>
             <Button variant="primary" type="submit">Register</Button>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br/>
+            <br/>
+            <p className="register"> Already a user? <Link style={{textDecoration: 'none', color: '#d85c27'}} to="/login">Login</Link></p>
         </Form>
     )
 

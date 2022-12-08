@@ -192,4 +192,9 @@ h1{
 .studio-background{
     background-color: white;
 }
+.register{
+    font-size: 14px;
+    color: #7f7d7d;
+    text-decoration: none;
+}
 

@@ -23,8 +23,8 @@ import SubscriptionsPage from './pages/SubscriptionsPage';
 
 function App() {
   return (
+      <Router>
     <div className="App">
-        <Router>
             <Header/>
             <AuthProvider>
             <Routes>
@@ -47,9 +47,9 @@ function App() {
                 <Route element={<SubscriptionsPage />} path="/subscriptions"/>
             </Routes>
             </AuthProvider>
-        </Router>
 
     </div>
+      </Router>
   );
 }
 
