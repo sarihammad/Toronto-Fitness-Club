@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import AuthContext from '../context/AuthContext'
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -8,9 +8,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
     //const {logoutUser} = useContext(AuthContext) ?? {}
+    const navigate = useNavigate();
+
     function logout(){
         localStorage.removeItem("authTokens");
+        navigate("/login");
         window.location.reload();
+        
     }
     return (
         <Navbar sticky="top"  expand="lg" bg="dark" variant="dark">
