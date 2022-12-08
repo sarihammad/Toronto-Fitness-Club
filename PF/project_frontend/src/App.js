@@ -19,6 +19,7 @@ import FilterClassesPage from "./pages/FilterClassesPage";
 import SortStudioPostCode from "./pages/SortStudioPostCode";
 import CreditCardPage from "./pages/CreditCardPage";
 import SortStudioMap from "./pages/SortStudioMap";
+import SubscriptionsPage from './pages/SubscriptionsPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Header/>
             <AuthProvider>
             <Routes>
+                <Route element={<CreditCardPage />} path="/subscriptions/subscribe/"/>
                 <Route element={<HomePage />} path="/" exact/>
                 <Route element={<LoginPage />} path="/login"/>
                 <Route element={<RegisterPage />} path="/register"/>
@@ -42,7 +44,7 @@ function App() {
                 <Route element={<FilterStudiosPage />} path="/studio/filter"/>
                 <Route element={<FilterClassesPage />} path="/studio/:id/classes/filter"/>
 
-                <Route element={<CreditCardPage />} path="/subscriptions/subscribe/"/>
+                <Route element={<SubscriptionsPage />} path="/subscriptions"/>
             </Routes>
             </AuthProvider>
         </Router>

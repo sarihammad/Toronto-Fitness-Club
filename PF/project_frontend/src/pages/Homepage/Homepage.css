@@ -70,6 +70,13 @@
     margin-right: 150px;
     margin-left: -70px;
 }
+.subtext-second-wide{
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 20px;
+    margin-right: 150px;
+    margin-left: -71px;
+}
 .gym-img{
     background-image: url("https://thumbor.thedailymeal.com/opKcYX7uRLdIajlOMGuVG8qqGCU=/870x565/https://www.theactivetimes.com/sites/default/files/2019/02/08/00_istockphoto.com_.jpg");
     background-repeat: no-repeat;
@@ -115,5 +122,38 @@
     background-color: #d85c27;
 }
 
+  .dflex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
 
+  .subscription-carousel {
+      @extend .dflex;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+  }
 
+  .scrolling-wrapper {
+      width: 60%;
+      overflow: hidden;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+
+  }
+
+  .inner-carousel {
+    display: inline-flex;
+    padding: 40px;
+
+}
+
+/* .card {
+    width: 300px;
+    padding: 30px 20px;
+    margin-left: 1.5vw;
+} */
+
+/* eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwNTIzMDgwLCJpYXQiOjE2NzA0MzY2ODAsImp0aSI6IjdhZDhkZjNhZDIxOTQ0ZTI4N2ZmZThhOGU3NTMyMGM1IiwidXNlcl9pZCI6NTZ9.ksODX0A2XY2QEJRxol5xbIwMcPV8Du1BDTOsgJdp0Kw */
