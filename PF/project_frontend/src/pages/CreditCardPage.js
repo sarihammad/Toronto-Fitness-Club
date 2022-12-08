@@ -65,7 +65,7 @@ const CreditCardPage = () => {
                     <Form.Control type="text" id="expiry-year" onChange={e => setExpiryYear(e.target.value)} placeholder="Expiry Year"/>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="cvv">Cvv</Form.Label>
+                    <Form.Label htmlFor="cvv">CVV</Form.Label>
                     <Form.Control type="text" id="cvv" onChange={e => setCardCvv(e.target.value)} placeholder="CVV"/>
                 </Form.Group>
                 <Button variant="primary" type="submit">Register</Button>

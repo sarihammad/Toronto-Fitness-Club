@@ -28,7 +28,18 @@ function Header() {
                             <>
                             <Nav.Link href="/class/schedule">My Schedule</Nav.Link>
                             <Nav.Link href="/class/history">My History</Nav.Link>
-                            <Nav.Link href="/subscriptions/subscribe/">Card Page</Nav.Link>
+                            <Nav.Link href="/subscriptions/">Subscriptions</Nav.Link>
+
+                            <NavDropdown title="Payments" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="/subscriptions/card/edit/">Payment Method</NavDropdown.Item>
+                                <NavDropdown.Item href="/subscriptions/payments/history/">
+                                    Payment History
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/subscriptions/payments/future/">
+                                    Upcoming Payments
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/profile/view">View Profile</NavDropdown.Item>
                                 <NavDropdown.Item href="/profile/edit">
@@ -39,6 +50,8 @@ function Header() {
                                     Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
+
+                            <Nav.Link href="/subscriptions/subscribe/">Card Page</Nav.Link>
                             </>
                         )}
                         {!localStorage.getItem("authTokens") && (
@@ -55,48 +68,3 @@ function Header() {
 }
 
 export default Header;
-/*
-
-const Header = () => {
-    const {logoutUser} = useContext(AuthContext) ?? {}
-    const isLoggedin = useContext(AuthContext)
-    //const { user } = useContext(AuthContext)
-
-    //console.log(localStorage.getItem("authTokens"))
-    return (
-        <Navbar bg="light">
-            <Container>
-            <Navbar.Brand href="/">TFC</Navbar.Brand>
-                    <Nav className="me-auto">
-                        <div>
-                        <Link to="/">Home</Link>
-                        {localStorage.getItem("authTokens") && (
-                            <>
-                            <span>  |  </span>
-                            <Link to="/profile/view">Profile</Link>
-                            <span>  |  </span>
-                            <Link to="/profile/edit">Edit Profile</Link>
-                            <span>  |  </span>
-                            <Link to="/studio/currlocation">Sort Studios</Link>
-                            <span>  |  </span>
-                            <Link to="/login" onClick={logoutUser}>Logout</Link>
-                            </>
-                        )}
-                        {!localStorage.getItem("authTokens") && (
-                            <>
-                            <span>  |  </span>
-                            <Link to="/login" >Login</Link>
-                            <span>  |  </span>
-                            <Link to="/register">Register</Link>
-                            </>
-                        )}
-
-                    </div>
-                </Nav>
-        </Container>
-        </Navbar>
-    )
-}
-*/
-
-//export default Header
