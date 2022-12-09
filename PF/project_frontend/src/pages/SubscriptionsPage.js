@@ -43,12 +43,15 @@ const SubscriptionsPage = () => {
     const Card = (props) => (
         // <Card>
         //     <Card.Body>
+        <div>
                 <div className="subscription_card">
                     <div className="card_data">
                         <div key={ props.id }>
                             <div key={ props.membership }><h3>{ frequency_dict[props.membership] }</h3></div>
                             <div key={ props.membership }><h5>${ props.price }/{ props.membership } days</h5></div>
                             <br />
+                            <br/>
+                            <br/>
                             <hr />
                             {localStorage.getItem("authTokens") && (
                                 <Link to={ "/subscriptions/subscribe" }><Button class="subscribe_button">Subscribe</Button></Link>
@@ -61,8 +64,7 @@ const SubscriptionsPage = () => {
                         </div>
                     </div>
                 </div>
-        //     </Card.Body>                                
-        // </Card>
+        </div>
     );
 
 
@@ -79,10 +81,12 @@ const SubscriptionsPage = () => {
 
 
     return (
-        <div>
+        <div className="background">
             <br/>
-            <h1>Subscriptions</h1>
+            <h1 style={{color: "white"}}>Subscriptions</h1>
             <br/>
+            <div style={{marginLeft:"67vh", color: "whitesmoke"}}>Subscribe to one of our plans to book your first class!</div>
+            <div style={{marginLeft:"67vh", color: "whitesmoke"}}>Or if you're already subscribed, explore other plans:</div>
             {/* <div className="subscription_container studio-list"> */}
             {/* <div className="subscription_container">
 

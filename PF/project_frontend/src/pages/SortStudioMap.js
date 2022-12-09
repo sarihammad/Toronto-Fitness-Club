@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Pagination from "react-bootstrap/Pagination";
 import AuthContext from "../context/AuthContext";
+import Dropdown from "react-bootstrap/Dropdown";
 
 
 function SortStudioMap () {
@@ -111,6 +112,7 @@ function SortStudioMap () {
 {/*                <br/>
             <h1>Find Studios</h1>*/}
                 <h6 className="studio-list">Set pinpoint on map to sort studios:</h6>
+                <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
 
             <Map
                 google={window.google}
@@ -135,6 +137,18 @@ function SortStudioMap () {
                 ))}
                 {/*infoWindow*/}
             </Map>
+                <div className="pinpoint-buttons">
+                <Dropdown className="studio-list">
+                    <Dropdown.Toggle id="dropdown-basic">
+                        Sorting by Pinpoint
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} activeStyle={{}} to="/studio/postcode/">Sort By Postal Code</Dropdown.Item>
+                        <Dropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">Sort By Current Location</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                <br/>
+                </div>
 
                 <div>
 
@@ -155,7 +169,12 @@ function SortStudioMap () {
                                             <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                                         </Card.Text>
                                         <Link to={"/studio/" + studio.id + "/details"}><Button variant="outline-secondary">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
-                                        <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
+                                        {localStorage.getItem("authTokens") && (
+                                            <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
+                                        )}
+                                        {!localStorage.getItem("authTokens") && (
+                                            <Link to={"/subscriptions"}><Button variant="primary">Studio Classes</Button></Link>
+                                        )}
                                     </div>
                                 </Card.Body>
                                 <Card.Footer className="text-muted" key={studio.phone_num}>Contact at {studio.phone_num}</Card.Footer>

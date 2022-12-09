@@ -150,7 +150,7 @@ const ClassesPage = () => {
                                             <div key={curr_time.class_date}>Date: {curr_time.class_date}</div>
                                             <div key={curr_time.start_time}>Time: {curr_time.start_time} - {curr_time.end_time}</div>
                                             </Card.Text>
-                                            <Button variant="success" onClick={() => enrol(curr_class.id, curr_time.id)}>Enrol</Button>
+                                            <Button variant="success" onClick={() => enrol(curr_class.id, curr_time.id)}>Enrol</Button>&nbsp;&nbsp;&nbsp;
                                             <Button variant="danger" onClick={() => drop(curr_class.id, curr_time.id)}>Drop</Button>
                                             
                                             </div>

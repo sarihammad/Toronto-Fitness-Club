@@ -24,23 +24,22 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} activeStyle={{}} to='/'>Home</Nav.Link>
-                        <NavDropdown title="Find Studios" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} activeStyle={{}} to='/studio/postcode/'>Sort by Postal Code</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort by Pinpoint</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link as={Link} activeStyle={{}} to='/studio/postcode/'>Find Studios</Nav.Link>
+                        <Nav.Link as={Link} activeStyle={{}} to="/subscriptions">Subscriptions</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
-                            <Nav.Link as={Link} activeStyle={{}} to="/class/schedule">My Schedule</Nav.Link>
-                            <Nav.Link as={Link} activeStyle={{}} to="/class/history">My History</Nav.Link>
-                            <Nav.Link as={Link} activeStyle={{}} to="/subscriptions/subscribe/">Card Page</Nav.Link>
+                                <NavDropdown title="My Classes" id="basic-nav-dropdown">
+                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/schedule">My Schedule</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/history">Past Classes</NavDropdown.Item>
+                                </NavDropdown>
+
 
                             <NavDropdown title="Payments" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/subscriptions/card/edit/">Payment Method</NavDropdown.Item>
-                                <NavDropdown.Item href="/subscriptions/payments/history/">
+                                <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/card/edit/">Payment Method</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/payments/history/">
                                     Payment History
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="/subscriptions/payments/future/">
+                                <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/payments/future/">
                                     Upcoming Payments
                                 </NavDropdown.Item>
                             </NavDropdown>
@@ -55,7 +54,7 @@ function Header() {
                                 </NavDropdown.Item>
                             </NavDropdown>
 
-                            <Nav.Link href="/subscriptions/subscribe/">Card Page</Nav.Link>
+                            <Nav.Link as={Link} activeStyle={{}} to="/subscriptions/subscribe/">Card Page</Nav.Link>
                             </>
                         )}
                         {!localStorage.getItem("authTokens") && (

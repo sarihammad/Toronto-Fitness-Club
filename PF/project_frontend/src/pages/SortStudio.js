@@ -6,6 +6,8 @@ import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Pagination from "react-bootstrap/Pagination";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 //is this saved ?
 const SortStudio = () => {
     const [studioList, setStudioList] = useState([])
@@ -80,14 +82,24 @@ const SortStudio = () => {
     }
     return (
         <div>
-            <div className="studio-upper"><h5 className="h2-text">Find Studios Near You: Viewing All</h5></div>
+            <div className="studio-upper"><h5 className="h2-text">Find Studios: Sorting By Current Location</h5></div>
 {/*            <br/>
             <h1>Find Studios</h1>
             <h6 className="studio-list">Viewing All Studios</h6>*/}
             <Map studios={studioList}/>
+            <Dropdown className="studio-list">
+                <Dropdown.Toggle id="dropdown-basic">
+                    Sorting By Current Location
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort By Pinpoint</Dropdown.Item>
+                    <Dropdown.Item as={Link} activeStyle={{}} to="/studio/postcode/">Sort By Postal Code</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
             <br/>
 {/*            <Link to="/studio/postcode/" className="studio-list"><Button variant="light">Sort By Postal Code</Button></Link>
             <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>*/}
+
             <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
             {/*<Button className="sort-text" variant="link" onClick={() => {
                 setPageNumCurr(1)
@@ -105,7 +117,12 @@ const SortStudio = () => {
                             <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                             </Card.Text>
                             <Link to={"/studio/" + studio.id + "/details"} ><Button variant="outline-secondary" >Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
-                            <Link to={"/studio/" + studio.id + "/classes"} ><Button variant="primary">Studio Classes</Button></Link>
+                                {localStorage.getItem("authTokens") && (
+                                    <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
+                                )}
+                                {!localStorage.getItem("authTokens") && (
+                                    <Link to={"/subscriptions"}><Button variant="primary">Studio Classes</Button></Link>
+                                )}
                              </div>
                         </Card.Body>
                         <Card.Footer className="text-muted" key={studio.phone_num}>Contact at {studio.phone_num}</Card.Footer>

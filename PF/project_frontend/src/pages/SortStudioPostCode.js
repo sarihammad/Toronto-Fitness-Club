@@ -6,6 +6,7 @@ import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Pagination from "react-bootstrap/Pagination";
+import Dropdown from "react-bootstrap/Dropdown";
 //is this saved ?
 const SortStudioPostCode = () => {
     const [studioList, setStudioList] = useState([])
@@ -100,6 +101,16 @@ const SortStudioPostCode = () => {
             <Link to="/studio/map" className="studio-list"><Button variant="light">Sort By Pinpoint on Map</Button></Link>*/}
 {/*            <br/>
             <br/>*/}
+            <Dropdown className="studio-list">
+                <Dropdown.Toggle id="dropdown-basic">
+                    Sorting By Postal Code
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort By Pinpoint</Dropdown.Item>
+                    <Dropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">Sort By Current Location</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+            <br/>
             <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
 
             <div className="studio-list">
@@ -114,7 +125,13 @@ const SortStudioPostCode = () => {
                                         <div key={studio.location.post_code}>Postal Code: {studio.location.post_code}</div>
                                     </Card.Text>
                                     <Link to={"/studio/" + studio.id + "/details"}><Button variant="outline-secondary">Studio Details</Button></Link>&nbsp;&nbsp;&nbsp;
-                                    <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
+                                    {localStorage.getItem("authTokens") && (
+                                        <Link to={"/studio/" + studio.id + "/classes"}><Button variant="primary">Studio Classes</Button></Link>
+                                    )}
+                                    {!localStorage.getItem("authTokens") && (
+                                        <Link to={"/subscriptions"}><Button variant="primary">Studio Classes</Button></Link>
+                                    )}
+
                                 </div>
                             </Card.Body>
                             <Card.Footer className="text-muted" key={studio.location.distance}>{studio.location.distance} km from {postCode}</Card.Footer>

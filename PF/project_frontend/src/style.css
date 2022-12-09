@@ -71,6 +71,7 @@ h1{
 .post-code-form{
     margin-left:220px;
     margin-right:220px;
+    margin-bottom: -23px;
     padding: 10px;
 }
 .profile{
@@ -155,7 +156,7 @@ h1{
     margin-top: 40px;
 }
 .map-page{
-    margin-top:65vh;
+    margin-top:5vh;
 }
 .btn-primary{
     background-color: #d85c27 !important;
@@ -165,8 +166,9 @@ h1{
 .studio-upper{
     height: 8vh;
     width: 100vw;
-    background-color: #d85c27;
-    color: white;
+    background-color: whitesmoke;
+/*    background-image: url("https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");*/
+    color: black;
 }
 .h2-text{
     padding-top: 17px;
@@ -196,5 +198,8 @@ h1{
     font-size: 14px;
     color: #7f7d7d;
     text-decoration: none;
+}
+.pinpoint-buttons{
+    margin-top: 60vh;
 }
 
