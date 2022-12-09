@@ -17,6 +17,7 @@ const EditCardPage = () => {
     const [card_expiry_year, setCardExpiryYear] = useState("")
     const [card_cvv, setCardCVV] = useState("")
     const [popup, setPopup] = useState("")
+    const [error, setError] = useState("")
 
 
     const handleSubmit = (e) => {
@@ -46,7 +47,10 @@ const EditCardPage = () => {
                 console.log(res.data);
                 setPopup("Succesfully edited the card.")
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setError("You must be subscribed to edit your card.")
+            })
     };
 
 /*    useEffect(() => {
@@ -141,6 +145,7 @@ const EditCardPage = () => {
                 <br></br>
                 <br></br>
                 <div style={{color: "green"}}>{popup}</div>
+                <div style={{color: "red"}}>{error}</div>
             </Form>
         </section>
     )

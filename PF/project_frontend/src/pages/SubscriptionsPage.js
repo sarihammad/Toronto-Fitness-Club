@@ -36,6 +36,7 @@ const SubscriptionsPage = () => {
         }
     }
 
+
     var frequency_dict = {1: "Daily", 7: "Weekly", 30: "Monthly", 365: "Yearly"};
     var redirect_path = "/login?redirect=subscriptions"
 
@@ -79,47 +80,16 @@ const SubscriptionsPage = () => {
       );
 
 
+
     return (
         <div className="background">
             <br/>
             <h1 style={{color: "white"}}>Subscriptions</h1>
             <br/>
             <div style={{textAlign:"center", color: "whitesmoke"}}>Subscribe to one of our plans to book your first class!</div>
-            <div style={{textAlign:"center", color: "whitesmoke"}}>Or if you're already subscribed, explore other plans:</div>
-            {/* <div className="subscription_container studio-list"> */}
-            {/* <div className="subscription_container">
-
-
-                {
-                    subscriptionsList.map(subscription => (
-                        <>
-                            <Card>
-                                <Card.Body>
-                                    <div key={ subscription.id }>
-                                        <div key={ subscription.membership }><Card.Title>{ frequency_dict[subscription.membership] }</Card.Title></div>
-                                        <div key={ subscription.membership }><Card.Title>${ subscription.price }/{ subscription.membership } days</Card.Title></div>
-                                        {localStorage.getItem("authTokens") && (
-                                            <Link to={ "/subscriptions/subscribe" }><Button variant="primary">Subscribe</Button></Link>
-                                        )}
-                                        {!localStorage.getItem("authTokens") && (
-                                            <Link to={ "/login" }><Button variant="primary">Subscribe</Button></Link>
-                                        )}
-
-                                    </div>
-                                </Card.Body>                                
-                            </Card>
-                            <br/>
-                        </>
-                    ))
-                }
-                <div key={loginError}>{loginError}</div>
-
-
-            </div> */}
+            {/* <div style={{textAlign:"center", color: "whitesmoke"}}>Or if you're already subscribed, explore other plans:</div>            */}
             <CardContainer cards={ subscriptionsList }/>
-
         </div>
-
     )
 }
 

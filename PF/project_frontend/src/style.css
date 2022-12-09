@@ -11,9 +11,9 @@ form{
     list-style: none;
     position: relative;
 }
-.html, body {
+html, body {
     background-color: whitesmoke;
-    color: #3c3c3c;
+    color: white;
     margin: 0;
     padding: 0;
 }
@@ -210,3 +210,12 @@ h3{
     margin-top: 60vh;
 }
 
+.nav-link:hover {
+    background-color: #e05c24;
+}
+
+
+.subscribe_button {
+    margin:"auto";
+    float:"center";
+}

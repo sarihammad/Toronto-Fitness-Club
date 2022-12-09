@@ -28,7 +28,10 @@ function Header() {
                             <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort by Pinpoint</NavDropdown.Item>
                             <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link as={Link} activeStyle={{}} to="/subscriptions">Subscriptions</Nav.Link>
+                        <NavDropdown title="Subscriptions" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} activeStyle={{}} to='/subscriptions'>Subscribe</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} activeStyle={{}} to='/subscriptions/edit'>Edit Subscription</NavDropdown.Item>
+                        </NavDropdown>
                         {localStorage.getItem("authTokens") && (
                             <>
                                 <NavDropdown title="My Classes" id="basic-nav-dropdown">
@@ -55,8 +58,6 @@ function Header() {
                                     Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
-
-                            <Nav.Link as={Link} activeStyle={{}} to="/subscriptions/subscribe/">Card Page</Nav.Link>
                             </>
                         )}
                         {!localStorage.getItem("authTokens") && (
