@@ -2,8 +2,11 @@ import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {Link, useParams} from "react-router-dom";
+
 
 const CreditCardPage = () => {
+    const {id} = useParams();
     const [membership, setMembership] = useState(0)
     const [card_num, setCardNum] = useState("")
     const [card_expiry_month, setExpiryMonth] = useState("")
@@ -21,7 +24,7 @@ const CreditCardPage = () => {
     }
 
     let setCard = async()=>{
-        setMembership(4)
+        setMembership(1)
         let response = await fetch("http://127.0.0.1:8000/subscriptions/subscribe/", {
             method: "POST",
             headers:{
@@ -53,20 +56,20 @@ const CreditCardPage = () => {
                 <h1>Enter your Card Information</h1>
                 <hr />
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="cardnum">Card Number</Form.Label>
-                    <Form.Control type="text" id="cardnum" onChange={e => setCardNum(e.target.value)} placeholder="Card number"/>
+                    <Form.Label htmlFor="card_num">Card Number</Form.Label>
+                    <Form.Control type="text" id="card_num" onChange={e => setCardNum(e.target.value)} placeholder="Card number"/>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="expiry-month">Expiry Month</Form.Label>
-                    <Form.Control type="text" id="expiry-month" onChange={e => setExpiryMonth(e.target.value)} placeholder="Expiry Month"/>
+                    <Form.Label htmlFor="card_expiry_month">Expiry Month</Form.Label>
+                    <Form.Control type="text" id="card_expiry_month" onChange={e => setExpiryMonth(e.target.value)} placeholder="Expiry Month"/>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="expiry-year">Expiry Year</Form.Label>
-                    <Form.Control type="text" id="expiry-year" onChange={e => setExpiryYear(e.target.value)} placeholder="Expiry Year"/>
+                    <Form.Label htmlFor="card_expiry_year">Expiry Year</Form.Label>
+                    <Form.Control type="text" id="card_expiry_year" onChange={e => setExpiryYear(e.target.value)} placeholder="Expiry Year"/>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="cvv">CVV</Form.Label>
-                    <Form.Control type="text" id="cvv" onChange={e => setCardCvv(e.target.value)} placeholder="CVV"/>
+                    <Form.Label htmlFor="card_cvv">CVV</Form.Label>
+                    <Form.Control type="text" id="card_cvv" onChange={e => setCardCvv(e.target.value)} placeholder="CVV"/>
                 </Form.Group>
                 <Button variant="primary" type="submit">Register</Button>
 

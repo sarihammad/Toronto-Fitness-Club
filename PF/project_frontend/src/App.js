@@ -21,12 +21,12 @@ import CreditCardPage from "./pages/CreditCardPage";
 import SortStudioMap from "./pages/SortStudioMap";
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import PaymentsPage from './pages/PaymentsPage';
-
+import FuturePayments2 from './pages/FuturePayments';
 
 function App() {
   return (
-      <Router>
     <div className="App">
+        <Router>
             <Header/>
             <AuthProvider>
             <Routes>
@@ -46,13 +46,14 @@ function App() {
                 <Route element={<FilterClassesPage />} path="/studio/:id/classes/filter"/>
                 <Route element={<SubscriptionsPage />} path="/subscriptions"/>
                 <Route element={<CreditCardPage />} path="/subscriptions/subscribe/"/>
-                <Route element={<PaymentsPage />} path="/subscriptions/payments/history"/>
+                <Route element={<PaymentsPage />} path="/subscriptions/payments/history/"/>
+                <Route element={<FuturePayments2 />} path="/subscriptions/payments/future/"/>
 
             </Routes>
             </AuthProvider>
+        </Router>
 
     </div>
-      </Router>
   );
 }
 

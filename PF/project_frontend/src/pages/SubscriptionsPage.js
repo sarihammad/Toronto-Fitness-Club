@@ -20,22 +20,6 @@ const SubscriptionsPage = () => {
         getSubscriptionInfo()
     },[]);
 
-    // useEffect(() => {
-    //     const loggedInUser = localStorage.getItem("authenticated");
-    //     if (loggedInUser) {
-    //     setauthenticated(loggedInUser);
-    //     }
-    // }, []);
-
-    // var button_path;
-
-    // if (!authenticated) {
-    //     button_path = "/login";
-    // } else {
-    //     button_path = "/home";
-    // }
-        
-
     let getSubscriptionInfo = async() => {
         let response = await fetch(`http://127.0.0.1:8000/subscriptions/memberships/`, {
             method: "GET",
@@ -67,11 +51,11 @@ const SubscriptionsPage = () => {
                             <br />
                             <hr />
                             {localStorage.getItem("authTokens") && (
-                                <Link to={ "/subscriptions/subscribe" }><Button variant="primary">Subscribe</Button></Link>
+                                <Link to={ "/subscriptions/subscribe" }><Button class="subscribe_button">Subscribe</Button></Link>
                             )}
                             {!localStorage.getItem("authTokens") && (
                                 // <NavLink to="/login" state={{ prev: location.pathname }}><Button variant="primary">Subscribe</Button></NavLink>
-                                <Link to={ redirect_path }><Button variant="primary">Subscribe</Button></Link>
+                                <Link to={ redirect_path }><Button class="subscribe_button">Subscribe</Button></Link>
 
                             )}
                         </div>
