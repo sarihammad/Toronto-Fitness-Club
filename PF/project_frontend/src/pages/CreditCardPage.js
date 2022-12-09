@@ -14,6 +14,7 @@ const CreditCardPage = () => {
     const [card_cvv, setCardCvv] = useState("")
     let {authTokens, logoutUser} = useContext(AuthContext)
     const [error, setError] = useState([])
+    const [popup, setPopup] = useState("")
 
 /*    useEffect(() => {
         setCard()
@@ -29,15 +30,16 @@ const CreditCardPage = () => {
         let response = await fetch(`http://127.0.0.1:8000/subscriptions/${id}/subscribe/`, {
             method: "POST",
             headers:{
+                "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + String(authTokens.access)
             },
             body:JSON.stringify({
-                "membership":id,
-                "card_num":card_num,
-                "card_expiry_month":card_expiry_month,
-                "card_expiry_year":card_expiry_year,
-                "card_cvv":card_cvv
+                membership: id,
+                card_num: card_num,
+                card_expiry_month: card_expiry_month,
+                card_expiry_year: card_expiry_year,
+                card_cvv: card_cvv
             })
         })
         let data = await response.json()
@@ -45,6 +47,7 @@ const CreditCardPage = () => {
         if (response.status === 200){
             //navigate so some page
             console.log(data)
+            setPopup("Successfully subscribed to the membership")
 
         }else if(response.status === 403){
             console.log(data)
@@ -77,6 +80,7 @@ const CreditCardPage = () => {
                 <br/>
                 <br/>
                 <div style={{color: "red"}}>{error}</div>
+                <div style={{color: "green"}}>{popup}</div>
 
             </Form>
         </>
