@@ -85,8 +85,8 @@ const SubscriptionsPage = () => {
             <br/>
             <h1 style={{color: "white"}}>Subscriptions</h1>
             <br/>
-            <div style={{marginLeft:"67vh", color: "whitesmoke"}}>Subscribe to one of our plans to book your first class!</div>
-            <div style={{marginLeft:"67vh", color: "whitesmoke"}}>Or if you're already subscribed, explore other plans:</div>
+            <div style={{textAlign:"center", color: "whitesmoke"}}>Subscribe to one of our plans to book your first class!</div>
+            <div style={{textAlign:"center", color: "whitesmoke"}}>Or if you're already subscribed, explore other plans:</div>
             {/* <div className="subscription_container studio-list"> */}
             {/* <div className="subscription_container">
 

@@ -61,8 +61,7 @@ class ClassesView(GenericAPIView):
 class EnrolSingleView(CreateAPIView):
     serializer_class = EnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    # permission_classes = [IsAuthenticated, IsSubscribed]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsSubscribed]
 
     def post(self, request, *args, **kwargs):
         class_obj = get_object_or_404(Class, id=self.kwargs['pk'])
@@ -92,8 +91,7 @@ class EnrolSingleView(CreateAPIView):
 class EnrolAllView(GenericAPIView):
     serializer_class = AllEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    # permission_classes = [IsAuthenticated, IsSubscribed]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsSubscribed]
 
     # def filter_queryset(self, queryset):
     #     return queryset.filter(enrolled_class=Class.objects.filter(id=self.kwargs['pk']).first())
@@ -121,8 +119,7 @@ class EnrolAllView(GenericAPIView):
 class DropSingleView(CreateAPIView):
     serializer_class = DropEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    # permission_classes = [IsAuthenticated, IsSubscribed]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsSubscribed]
 
     def post(self, request, *args, **kwargs):
         class_obj = get_object_or_404(Class, id=self.kwargs['pk'])
@@ -143,8 +140,7 @@ class DropSingleView(CreateAPIView):
 class DropAllView(GenericAPIView):
     serializer_class = AllEnrollmentsSerializer
     queryset = Enrollments.objects.all()
-    # permission_classes = [IsAuthenticated, IsSubscribed]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsSubscribed]
     def post(self, request, *args, **kwargs):
         class_obj = Class.objects.get(id=self.kwargs['pk'])
         enrolled_times = Time.objects.filter(time_class=class_obj)

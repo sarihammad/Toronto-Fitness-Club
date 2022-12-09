@@ -24,6 +24,13 @@ h1{
     color: #3c3c3c;
 }
 
+h3{
+    margin: 80px;
+    padding-top: 10px;
+    text-align: center;
+    color: #3c3c3c;
+}
+
 .marker {
     position: absolute;
     top: 50%;

@@ -11,6 +11,7 @@ const HistoryPage = () => {
     let [history, setHistory] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
+    const [empty, setEmpty] = useState(false)
     const [prev, setPrev] = useState(false)
     const [next, setNext] = useState(true)
     const [page_num_post, setPageNumPost] = useState(1)
@@ -50,6 +51,9 @@ const HistoryPage = () => {
             console.log(data)
             setHistory(data)
             setLoading(false)
+            if (data.length === 0) {
+                setEmpty(true)
+            }
         } else if (response.statusText==='Unauthorized') {
             logoutUser()
         }
@@ -58,6 +62,19 @@ const HistoryPage = () => {
     if (loading){
         return (
             <div></div>
+        )
+    }
+
+    if (empty) {
+        return (
+            <div>
+                <br/>
+                <h1>You have not enrolled in any past classes</h1>
+                <h3>Find a studio to book a class!</h3>
+                <br/>
+                <div className="button" style={{margin: "auto"}}><Link to="/studio/sortby/currlocation">Find Studios Near You</Link></div>
+                <br/>
+            </div>
         )
     }
     return (
