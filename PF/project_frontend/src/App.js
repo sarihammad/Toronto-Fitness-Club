@@ -22,6 +22,7 @@ import SortStudioMap from "./pages/SortStudioMap";
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import PaymentsPage from './pages/PaymentsPage';
 import FuturePayments2 from './pages/FuturePayments2';
+import EditCardPage from './pages/EditCardPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                 <Route element={<SubscriptionsPage />} path="/subscriptions"/>
                 <Route element={<CreditCardPage />} path="/subscriptions/:id/subscribe/"/>
                 <Route element={<PaymentsPage />} path="/subscriptions/payments/history/"/>
+                <Route element={<EditCardPage />} path="/subscriptions/card/edit/"/>
                 <Route element={<FuturePayments2 />} path="/subscriptions/payments/future/"/>
 
             </Routes>

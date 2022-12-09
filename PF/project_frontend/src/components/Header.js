@@ -37,7 +37,7 @@ function Header() {
                                 </NavDropdown>
 
                             <NavDropdown title="Payments" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/card/edit/">Payment Method</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/card/edit/">Edit Card Info</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/payments/history/">
                                     Payment History
                                 </NavDropdown.Item>
