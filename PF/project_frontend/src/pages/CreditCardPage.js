@@ -48,7 +48,7 @@ const CreditCardPage = () => {
         if (response.status === 200){
             //navigate so some page
             console.log(data)
-            setPopup("Successfully subscribed to the membership")
+            setPopup("Successfully subscribed to the membership. Find studios near you to book a class!")
 
         }else if(response.status === 403){
             console.log(data)
