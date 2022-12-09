@@ -112,6 +112,7 @@ function SortStudioMap () {
 {/*                <br/>
             <h1>Find Studios</h1>*/}
                 <h6 className="studio-list">Set pinpoint on map to sort studios:</h6>
+                <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
 
             <Map
                 google={window.google}
@@ -147,7 +148,6 @@ function SortStudioMap () {
                     </Dropdown.Menu>
                 </Dropdown>
                 <br/>
-                <Link to="/studio/filter/" className="studio-list"><Button variant="light">Filter</Button></Link>
                 </div>
 
                 <div>
