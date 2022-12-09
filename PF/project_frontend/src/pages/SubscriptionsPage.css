@@ -25,13 +25,13 @@
     /* color: #333; */
     /* background: #eee; */
     height: 50vh;
-    width: 50%;
+    width: 70%;
     padding: 1rem;
     overflow-x: auto;
     position: relative;
       align-items: center;
-      justify-content: space-around;
-      margin-left: 45vh;
+      justify-content: center;
+      margin-left: 27vh;
 
 
   }

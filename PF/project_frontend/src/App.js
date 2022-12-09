@@ -21,7 +21,7 @@ import CreditCardPage from "./pages/CreditCardPage";
 import SortStudioMap from "./pages/SortStudioMap";
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import PaymentsPage from './pages/PaymentsPage';
-import FuturePayments2 from './pages/FuturePayments';
+import FuturePayments2 from './pages/FuturePayments2';
 
 function App() {
   return (

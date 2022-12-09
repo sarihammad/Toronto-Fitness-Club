@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import Card from "react-card-container/dist/Card";
+import Card from 'react-bootstrap/Card';
 
 
 const FuturePayments2 = () => {
@@ -26,7 +26,7 @@ const FuturePayments2 = () => {
         let data = await response.json()
         if (response.status === 200){
             console.log(data)
-            setPayment(data)
+            setPayment(data.future_payment)
             setLoading(false)
         }else if(response.statusText==='Unauthorized'){
             logoutUser()
@@ -40,12 +40,14 @@ const FuturePayments2 = () => {
 
     return (
         <div>
-            <Card>
+            <div className="studio-upper"><h5 className="h2-text">Upcoming Payment</h5></div>
+            <br/>
+            <p className="studio-list">Your upcoming payment bill:</p>
+            <Card className="studio-list">
                 <Card.Body>
-                    <div><Card.Title>{payment.payment_date.split("T")[0]}</Card.Title></div>
-                    <div><p className="mb-2 text-muted">{payment.payment_date.split("T")[1].split(".")[0]}</p></div>
-                    <br />
-                    <div><Card.Subtitle>${payment.amount}</Card.Subtitle></div>
+                    <div><Card.Title>{payment.next_payment_date.split("T")[0]}</Card.Title></div>
+                    <div><p className="mb-2 text-muted">{payment.next_payment_date.split("T")[1].split(".")[0]}</p></div>
+                    <Card.Subtitle>${payment.amount}</Card.Subtitle>
                     <Card.Text>
                     <div>Card: {payment.card.card_num}</div>
                     </Card.Text>

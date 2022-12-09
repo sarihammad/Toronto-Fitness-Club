@@ -28,6 +28,7 @@ function Header() {
                             <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort by Pinpoint</NavDropdown.Item>
                             <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
                         </NavDropdown>
+                        <Nav.Link as={Link} activeStyle={{}} to="/subscriptions">Subscriptions</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
                             <Nav.Link as={Link} activeStyle={{}} to="/class/schedule">My Schedule</Nav.Link>
@@ -40,7 +41,7 @@ function Header() {
                                     Payment History
                                 </NavDropdown.Item>
                                 <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/payments/future/">
-                                    Upcoming Payments
+                                    Upcoming Payment
                                 </NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
