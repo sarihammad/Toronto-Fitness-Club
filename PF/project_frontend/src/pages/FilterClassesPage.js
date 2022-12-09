@@ -30,6 +30,22 @@ const FilterClassesPage = () => {
         getFilteredClasses()
     },[classNameFilter, coachFilter, dateFilter, startTimeFilter, endTimeFilter])
 
+
+    const convertTime12to24 = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+      
+        if (hours === '12') {
+          hours = '00';
+        }
+      
+        if (modifier === 'PM') {
+          hours = parseInt(hours, 10) + 12;
+        }
+      
+        return `${hours}:${minutes}:00`;
+      }
+
     const handleNextbtn = () => {
         if(next){
             getFilteredClasses()
@@ -166,14 +182,14 @@ const FilterClassesPage = () => {
                 <Form.Control type="time"
                               id="start-time-filter"
                               placeholder="Enter Start Time Filter"
-                              onChange={e => setStartTimeFilter(e.target.value)}/>
+                              onChange={e => setStartTimeFilter(convertTime12to24(e.target.value))}/>
                 <br/>
                 <label htmlFor="end-time-filter">Filter by End Time</label>
                 <br/>
                 <Form.Control type="time"
                               id="end-time-filter"
                               placeholder="Enter End Time Filter"
-                              onChange={e => setEndTimeFilter(e.target.value)}/>
+                              onChange={e => setEndTimeFilter(convertTime12to24(e.target.value))}/>
                 <br/>
             </Form>
             <Link to={`/studio/${id}/classes`} className="studio-list"><Button variant="light">View All Classes</Button></Link>
@@ -202,7 +218,7 @@ const FilterClassesPage = () => {
                                             <div key={curr_time.class_date}>Date: {curr_time.class_date}</div>
                                             <div key={curr_time.start_time}>Time: {curr_time.start_time} - {curr_time.end_time}</div>
                                             </Card.Text>
-                                            <Button variant="success" onClick={() => enrol(curr_class.id, curr_time.id)}>Enrol</Button>
+                                            <Button variant="success" onClick={() => enrol(curr_class.id, curr_time.id)}>Enrol</Button>&nbsp;&nbsp;&nbsp;
                                             <Button variant="danger" onClick={() => drop(curr_class.id, curr_time.id)}>Drop</Button>
                                             </div>
                                         </Card.Body>
