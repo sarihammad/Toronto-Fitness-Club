@@ -24,12 +24,17 @@ const FuturePayments2 = () => {
         })
         let data = await response.json()
         if (response.status === 200){
-            setPayment(data.future_payment)
-            setLoading(false)
             console.log(data)
+            setPayment(data)
+            setLoading(false)
         }else if(response.statusText==='Unauthorized'){
             logoutUser()
         }
+    }
+    if (loading){
+        return (
+            <div></div>
+        )
     }
 
     return (

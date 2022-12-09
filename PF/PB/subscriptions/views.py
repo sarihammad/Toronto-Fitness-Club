@@ -135,7 +135,7 @@ class PaymentFutureView(GenericAPIView):
             }
         }
 
-        return Response({'future_payment': future_payement})
+        return Response(future_payement)
 
 
 class CancelSubscriptionView(DestroyAPIView):
