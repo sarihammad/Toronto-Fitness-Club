@@ -11,6 +11,7 @@ const SchedulePage = () => {
     let [schedule, setSchedule] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
+    const [empty, setEmpty] = useState(false)
     const [prev, setPrev] = useState(false)
     const [next, setNext] = useState(true)
     const [page_num_post, setPageNumPost] = useState(1)
@@ -50,14 +51,30 @@ const SchedulePage = () => {
             console.log(data)
             setSchedule(data)
             setLoading(false)
+            if (data.length === 0) {
+                setEmpty(true)
+            }
         } else if (response.statusText==='Unauthorized') {
             logoutUser()
         }
 
     }
-    if (loading){
+    if (loading) {
         return (
             <div></div>
+        )
+    }
+
+    if (empty) {
+        return (
+            <div>
+                <br/>
+                <h1>You are currently not enrolled in any classes</h1>
+                <h3>Find a studio to book a class!</h3>
+                <br/>
+                <div className="button" style={{margin: "auto"}}><Link to="/studio/sortby/currlocation">Find Studios Near You</Link></div>
+                <br/>
+            </div>
         )
     }
     return (
@@ -65,10 +82,7 @@ const SchedulePage = () => {
             <br/>
             <h1>Schedule</h1>
             <br/>
-            {/* <Button className="sort-text" variant="link" onClick={() => {
-                setPageNumCurr(1)
-                getStudio()
-            }}>View all Studios</Button> */}
+            
             <div className="schedule-list">
                 {schedule.map(curr_time => (
                     <>
