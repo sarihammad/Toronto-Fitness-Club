@@ -31,8 +31,10 @@ function Header() {
                         <Nav.Link as={Link} activeStyle={{}} to="/subscriptions">Subscriptions</Nav.Link>
                         {localStorage.getItem("authTokens") && (
                             <>
-                            <Nav.Link as={Link} activeStyle={{}} to="/class/schedule">My Schedule</Nav.Link>
-                            <Nav.Link as={Link} activeStyle={{}} to="/class/history">My History</Nav.Link>
+                                <NavDropdown title="My Classes" id="basic-nav-dropdown">
+                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/schedule">My Schedule</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/history">My History</NavDropdown.Item>
+                                </NavDropdown>
                             <Nav.Link as={Link} activeStyle={{}} to="/subscriptions/subscribe/">Card Page</Nav.Link>
 
                             <NavDropdown title="Payments" id="basic-nav-dropdown">
