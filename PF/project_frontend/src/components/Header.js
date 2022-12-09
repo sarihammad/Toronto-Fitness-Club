@@ -14,7 +14,6 @@ function Header() {
         localStorage.removeItem("authTokens");
         navigate("/login");
         window.location.reload();
-        
     }
     return (
         <Navbar sticky="top"  expand="lg" bg="dark" variant="dark">
@@ -24,15 +23,16 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} activeStyle={{}} to='/'>Home</Nav.Link>
-                        <Nav.Link as={Link} activeStyle={{}} to='/studio/postcode/'>Find Studios</Nav.Link>
-                        <Nav.Link as={Link} activeStyle={{}} to="/subscriptions">Subscriptions</Nav.Link>
+                        <NavDropdown title="Find Studios" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} activeStyle={{}} to='/studio/postcode/'>Sort by Postal Code</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort by Pinpoint</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
+                        </NavDropdown>
                         {localStorage.getItem("authTokens") && (
                             <>
-                                <NavDropdown title="My Classes" id="basic-nav-dropdown">
-                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/schedule">My Schedule</NavDropdown.Item>
-                                    <NavDropdown.Item as={Link} activeStyle={{}} to="/class/history">Past Classes</NavDropdown.Item>
-                                </NavDropdown>
-
+                            <Nav.Link as={Link} activeStyle={{}} to="/class/schedule">My Schedule</Nav.Link>
+                            <Nav.Link as={Link} activeStyle={{}} to="/class/history">My History</Nav.Link>
+                            <Nav.Link as={Link} activeStyle={{}} to="/subscriptions/subscribe/">Card Page</Nav.Link>
 
                             <NavDropdown title="Payments" id="basic-nav-dropdown">
                                 <NavDropdown.Item as={Link} activeStyle={{}} to="/subscriptions/card/edit/">Payment Method</NavDropdown.Item>

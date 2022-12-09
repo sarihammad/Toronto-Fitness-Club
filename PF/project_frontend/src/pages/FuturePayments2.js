@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import Card from "react-card-container/dist/Card";
 
 
 const FuturePayments2 = () => {
@@ -39,7 +40,17 @@ const FuturePayments2 = () => {
 
     return (
         <div>
-            <p>{payment.amount}</p>
+            <Card>
+                <Card.Body>
+                    <div><Card.Title>{payment.payment_date.split("T")[0]}</Card.Title></div>
+                    <div><p className="mb-2 text-muted">{payment.payment_date.split("T")[1].split(".")[0]}</p></div>
+                    <br />
+                    <div><Card.Subtitle>${payment.amount}</Card.Subtitle></div>
+                    <Card.Text>
+                    <div>Card: {payment.card.card_num}</div>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         </div>
     )
 
