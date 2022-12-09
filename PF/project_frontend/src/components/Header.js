@@ -23,11 +23,7 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} activeStyle={{}} to='/'>Home</Nav.Link>
-                        <NavDropdown title="Find Studios" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} activeStyle={{}} to='/studio/postcode/'>Sort by Postal Code</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/map">Sort by Pinpoint</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} activeStyle={{}} to="/studio/sortby/currlocation">View All Studios</NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link as={Link} activeStyle={{}} to='/studio/postcode/'>Find Studios</Nav.Link>
                         <NavDropdown title="Subscriptions" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} activeStyle={{}} to='/subscriptions'>Subscribe</NavDropdown.Item>
                             <NavDropdown.Item as={Link} activeStyle={{}} to='/subscriptions/edit'>Edit/Cancel Subscription</NavDropdown.Item>
