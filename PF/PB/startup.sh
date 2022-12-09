@@ -8,7 +8,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 cd ..
 cd project_frontend
-npm install
+#npm install
 npm install --save google-maps-react --legacy-peer-deps
 cd ..
 cd PB
