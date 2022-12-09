@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import Button from "react-bootstrap/Button";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, Navigate} from "react-router-dom";
 import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
 import Carousel from 'react-bootstrap/Carousel';
@@ -15,6 +15,8 @@ const ClassesPage = () => {
     const [loading, setLoading] = useState(true)
     const [prev, setPrev] = useState(false)
     const [next, setNext] = useState(true)
+    const [popup, setPopup] = useState("")
+    const [redirect, setRedirect] = useState(false)
     const [page_num_post, setPageNumPost] = useState(1)
 
     useEffect(() => {
@@ -50,6 +52,13 @@ const ClassesPage = () => {
           body: JSON.stringify({
             enrolled_time: time_id
           })
+        }).then(res => {
+            console.log(res);
+            if (res.status === 200) {
+                setPopup("Successfully Enrolled In The Class Instance");
+            } else {
+                setRedirect(true);
+            }
         })
     }
 
@@ -60,7 +69,14 @@ const ClassesPage = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             "Authorization": "Bearer " + String(authTokens.access)
-        }})
+        }}).then(res => {
+            console.log(res);
+            if (res.status === 200) {
+                setPopup("Successfully Enrolled in All Class Instances");
+            } else {
+                setRedirect(true);
+            }
+        })
     }
 
     const drop = (class_id, time_id) => {
@@ -74,6 +90,14 @@ const ClassesPage = () => {
           body: JSON.stringify({
             enrolled_time: time_id
           })
+        }).then(res => {
+            console.log(res);
+            if (res.status === 200) {
+                setPopup("Successfully Dropped The Class Instance");
+            } else {
+                setRedirect(true);
+            }
+            
         })
     }
 
@@ -84,7 +108,14 @@ const ClassesPage = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             "Authorization": "Bearer " + String(authTokens.access)
-        }})
+        }}).then(res => {
+            console.log(res);
+            if (res.status === 200) {
+                setPopup("Successfully Dropped All Class Instances");
+            } else {
+                setRedirect(true);
+            }
+        })
     }
 
     let getClassesInfo = async()=>{
@@ -95,9 +126,9 @@ const ClassesPage = () => {
                 "Authorization": "Bearer " + String(authTokens.access)
             }
         })
+
         let data = await response.json()
         if (response.status === 200){
-            console.log(data)
             setClasses(data)
             setLoading(false)
         } else if (response.statusText==='Unauthorized') {
@@ -105,6 +136,11 @@ const ClassesPage = () => {
         }
 
     }
+
+    if (redirect) {
+        return <Navigate to='/subscriptions'/>;
+      }
+
     if (loading){
         return (
             <div></div>
@@ -125,6 +161,7 @@ const ClassesPage = () => {
             </Form>
             <Link to="/studio/sortby/currlocation" className="studio-list"><Button variant="light">View All Studios</Button></Link> */}
             <Link to={`/studio/${id}/classes/filter`} className="studio-list"><Button variant="light">Filter</Button></Link>
+            <div style={{color:"green", textAlign:"center"}}>{popup}</div>
             <div className="classes-list">
                 {classes.map(curr_class => (
                     <>
