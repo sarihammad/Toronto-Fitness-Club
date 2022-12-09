@@ -17,25 +17,31 @@
   } */
   
   .subscription_container {
-    display: flex;
-    border-radius: 6px;
+      display: flex;
+      margin-top: 30px;
+      background-color: #121212;
+      /*background-color: #2e353d;*/
+    border-radius: 20px;
     /* color: #333; */
     /* background: #eee; */
-    height: 40vh;
+    height: 50vh;
     width: 50%;
     padding: 1rem;
-    box-shadow: 0 0 0.25rem #000 inset;
     overflow-x: auto;
     position: relative;
-    justify-content: space-around;
-    
-    &::-webkit-scrollbar {
-      display: none;
-    }
+      align-items: center;
+      justify-content: space-around;
+      margin-left: 45vh;
+
+
   }
+.subscription_container::-webkit-scrollbar {
+   display: none;
+ }
   
   .subscription_card {
-    flex: 0 0 250px;
+    flex: 0 0 350px;
+      height: 40vh;
     box-shadow: 0 1px 1rem -4px #000;
     background: #fff;
     margin: 1rem;
@@ -43,14 +49,19 @@
     border-radius: 40px;
     cursor: pointer;
     transition: all 250ms ease-in-out;
-    
-    &:hover {
-      box-shadow: 0 4px 1rem -4px #000;
-      transform: translateY(-3px);
-    }
+
   }
+.subscription_card:hover {
+   box-shadow: 0 4px 1rem -4px #000;
+   transform: translateY(-3px);
+ }
 
   .card_data {
       padding: 3em;
       text-align: center;
+  }
+  .background{
+      background-color: black;
+      background-image: url("https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+      height: 100vh;
   }
