@@ -13,6 +13,7 @@ const CreditCardPage = () => {
     const [card_expiry_year, setExpiryYear] = useState("")
     const [card_cvv, setCardCvv] = useState("")
     let {authTokens, logoutUser} = useContext(AuthContext)
+    const [error, setError] = useState([])
 
 /*    useEffect(() => {
         setCard()
@@ -45,8 +46,9 @@ const CreditCardPage = () => {
             //navigate so some page
             console.log(data)
 
-        }else{
+        }else if(response.status === 403){
             console.log(data)
+            setError("You are already subscribed to a membership")
         }
 
     }
@@ -72,6 +74,9 @@ const CreditCardPage = () => {
                     <Form.Control type="text" id="card_cvv" onChange={e => setCardCvv(e.target.value)} placeholder="CVV"/>
                 </Form.Group>
                 <Button variant="primary" type="submit">Register</Button>
+                <br/>
+                <br/>
+                <div style={{color: "red"}}>{error}</div>
 
             </Form>
         </>

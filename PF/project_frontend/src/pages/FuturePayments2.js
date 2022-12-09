@@ -9,6 +9,7 @@ const FuturePayments2 = () => {
     const [payment, setPayment] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState([])
 
 
     useEffect(() => {
@@ -30,6 +31,8 @@ const FuturePayments2 = () => {
             setLoading(false)
         }else if(response.statusText==='Unauthorized'){
             logoutUser()
+        }else{
+            setError("No Upcoming payments. Subscribe to one of our options to start booking classes!")
         }
     }
     if (loading){
@@ -43,6 +46,7 @@ const FuturePayments2 = () => {
             <div className="studio-upper"><h5 className="h2-text">Upcoming Payment</h5></div>
             <br/>
             <p className="studio-list">Your upcoming payment bill:</p>
+            <div>{error}</div>
             <Card className="studio-list">
                 <Card.Body>
                     <div><Card.Title>{payment.next_payment_date.split("T")[0]}</Card.Title></div>
