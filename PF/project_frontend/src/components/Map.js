@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
-import Marker from './Marker.tsx';
+import Marker from './Marker.jsx';
 
 //const Marker = ({ text }) => <div>{text}</div>;
 
