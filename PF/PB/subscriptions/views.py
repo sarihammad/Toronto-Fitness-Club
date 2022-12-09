@@ -20,6 +20,8 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDe
     RetrieveUpdateAPIView, UpdateAPIView, GenericAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+import json
+
 
 class ListMembershipView(ListAPIView):
     serializer_class = MembershipSerializer
@@ -48,14 +50,16 @@ class SubscriptionView(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
+        data = json.loads(request.body.decode('utf-8'))
+
         current_membership = UserMembership.objects.filter(user=request.user)
         if current_membership:
             raise PermissionDenied({"message": "You are already subscribed to a membership"})
-
-        card = CardInfo.objects.create(card_num=request.POST.get('card_num', False),
-                                       card_expiry_month=request.POST.get('card_expiry_month', False),
-                                       card_expiry_year=request.POST.get('card_expiry_year', False),
-                                       card_cvv=request.POST.get('card_cvv', False))
+        
+        card = CardInfo.objects.create(card_num=data['card_num'],
+                                       card_expiry_month=data['card_expiry_month'],
+                                       card_expiry_year=data['card_expiry_year'],
+                                       card_cvv=data['card_cvv'])
 
         membership = Membership.objects.filter(id=kwargs['pk']).first()
         UserMembership.objects.create(user=request.user,
