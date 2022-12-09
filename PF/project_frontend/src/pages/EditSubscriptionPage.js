@@ -7,6 +7,7 @@ import Map from "../components/Map";
 import Card from 'react-bootstrap/Card';
 import Carousel from 'react-bootstrap/Carousel';
 import './SubscriptionsPage.css'
+import Alert from "react-bootstrap/Alert";
 
 const EditSubscriptionPage = () => {
     const {id} = useParams();
@@ -149,9 +150,12 @@ const EditSubscriptionPage = () => {
                 <br/>
                 <div style={{textAlign:"center", color: "whitesmoke"}}>Explore other plans or cancel your existing plan</div>
                 <CardContainer cards={ subscriptionsList }/>
-                <span style={{color:"green", backgroundColor:"white", margin:"auto", display:"table"}}>{popup}</span>
-                <span style={{color:"red", backgroundColor:"white", margin:"auto", display:"table"}}>{error}</span>
-                <br/>
+                {popup && <Alert style={{width: "43%", marginLeft: "55vh"}} variant="success">
+                    {popup}
+                </Alert>}
+                {error && <Alert style={{width: "30%", marginLeft: "64vh"}} key="danger" variant="danger">
+                    {error}
+                </Alert>}
                 <span style={{margin:"auto", display:"table"}}><Button class="subscribe_button" onClick={() => cancelSubscription()} style={{float:"center", margin:"auto"}}>Cancel Subscription</Button></span>
                 {/* <Link to={ `/subscriptions/subscribe` }><Button class="subscribe_button" style={{float:"center", margin:"auto"}}>Cancel Subscription</Button></Link> */}
             </div>

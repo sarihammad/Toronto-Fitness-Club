@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import {Link, useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 
 const EditCardPage = () => {
@@ -18,6 +19,8 @@ const EditCardPage = () => {
     const [card_cvv, setCardCVV] = useState("")
     const [popup, setPopup] = useState("")
     const [error, setError] = useState("")
+
+    const navigate = useNavigate();
 
 
     const handleSubmit = (e) => {
@@ -46,6 +49,7 @@ const EditCardPage = () => {
             .then(res => {
                 console.log(res.data);
                 setPopup("Succesfully edited the card.")
+                navigate("/subscriptions/payments/future/")
             })
             .catch(err => {
                 console.log(err)
@@ -56,7 +60,6 @@ const EditCardPage = () => {
 /*    useEffect(() => {
         EditProfile(first_name, last_name, email, phone_num, avatar)
     },[])*/
-    const navigate = useNavigate();
 
 /*    const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -145,7 +148,9 @@ const EditCardPage = () => {
                 <br></br>
                 <br></br>
                 <div style={{color: "green"}}>{popup}</div>
-                <div style={{color: "red"}}>{error}</div>
+                {error && <Alert key="danger" variant="danger">
+                    {error}
+                </Alert>}
             </Form>
         </section>
     )

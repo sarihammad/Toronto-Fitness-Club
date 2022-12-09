@@ -12,7 +12,7 @@ form{
     position: relative;
 }
 html, body {
-    background-color: whitesmoke;
+    background-color: white;
     color: white;
     margin: 0;
     padding: 0;
@@ -210,12 +210,9 @@ h3{
     margin-top: 60vh;
 }
 
-.nav-link:hover {
-    background-color: #e05c24;
-}
-
 
 .subscribe_button {
     margin:"auto";
     float:"center";
+    padding: 20px;
 }

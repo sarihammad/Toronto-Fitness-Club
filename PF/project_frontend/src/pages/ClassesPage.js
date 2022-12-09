@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Carousel from 'react-bootstrap/Carousel';
 import Pagination from "react-bootstrap/Pagination";
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 const ClassesPage = () => {
     const {id} = useParams();
@@ -161,7 +162,10 @@ const ClassesPage = () => {
             </Form>
             <Link to="/studio/sortby/currlocation" className="studio-list"><Button variant="light">View All Studios</Button></Link> */}
             <Link to={`/studio/${id}/classes/filter`} className="studio-list"><Button variant="light">Filter</Button></Link>
-            <div style={{color:"green", textAlign:"center"}}>{popup}</div>
+            {popup && <Alert style={{width: "26%", marginLeft: "67vh"}} variant="success">
+                {popup}
+            </Alert>}
+
             <div className="classes-list">
                 {classes.map(curr_class => (
                     <>

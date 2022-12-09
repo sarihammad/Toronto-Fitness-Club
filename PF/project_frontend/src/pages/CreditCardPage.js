@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 
 const CreditCardPage = () => {
@@ -13,7 +14,7 @@ const CreditCardPage = () => {
     const [card_expiry_year, setExpiryYear] = useState("")
     const [card_cvv, setCardCvv] = useState("")
     let {authTokens, logoutUser} = useContext(AuthContext)
-    const [error, setError] = useState([])
+    const [error, setError] = useState("")
     const [popup, setPopup] = useState("")
 
 /*    useEffect(() => {
@@ -79,8 +80,12 @@ const CreditCardPage = () => {
                 <Button variant="primary" type="submit">Register</Button>
                 <br/>
                 <br/>
-                <div style={{color: "red"}}>{error}</div>
-                <div style={{color: "green"}}>{popup}</div>
+                {error && <Alert key="danger" variant="danger">
+                    {error}
+                </Alert>}
+                {popup && <Alert style={{width: "70%", marginLeft: "10vh"}} variant="success">
+                    {popup}
+                </Alert>}
 
             </Form>
         </>
