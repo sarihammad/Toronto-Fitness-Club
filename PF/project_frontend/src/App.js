@@ -45,7 +45,7 @@ function App() {
                 <Route element={<FilterStudiosPage />} path="/studio/filter"/>
                 <Route element={<FilterClassesPage />} path="/studio/:id/classes/filter"/>
                 <Route element={<SubscriptionsPage />} path="/subscriptions"/>
-                <Route element={<CreditCardPage />} path="/subscriptions/subscribe/"/>
+                <Route element={<CreditCardPage />} path="/subscriptions/:id/subscribe/"/>
                 <Route element={<PaymentsPage />} path="/subscriptions/payments/history/"/>
                 <Route element={<FuturePayments2 />} path="/subscriptions/payments/future/"/>
 

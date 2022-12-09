@@ -24,15 +24,15 @@ const CreditCardPage = () => {
     }
 
     let setCard = async()=>{
-        setMembership(1)
-        let response = await fetch("http://127.0.0.1:8000/subscriptions/subscribe/", {
+        // setMembership(1)
+        let response = await fetch(`http://127.0.0.1:8000/subscriptions/${id}/subscribe/`, {
             method: "POST",
             headers:{
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + String(authTokens.access)
             },
             body:JSON.stringify({
-                "membership":membership,
+                "membership":id,
                 "card_num":card_num,
                 "card_expiry_month":card_expiry_month,
                 "card_expiry_year":card_expiry_year,

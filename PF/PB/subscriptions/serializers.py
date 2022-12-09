@@ -17,7 +17,7 @@ class CardInfoSerializer(serializers.ModelSerializer):
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Membership
-        fields = ("membership", "price")
+        fields = ("id", "membership", "price")
 
 
 class UserMembershipSerializer(serializers.ModelSerializer):

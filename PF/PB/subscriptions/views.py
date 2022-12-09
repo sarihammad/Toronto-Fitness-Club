@@ -52,12 +52,12 @@ class SubscriptionView(CreateAPIView):
         if current_membership:
             raise PermissionDenied({"message": "You are already subscribed to a membership"})
 
-        card = CardInfo.objects.create(card_num=request.POST['card_num'],
-                                       card_expiry_month=request.POST['card_expiry_month'],
-                                       card_expiry_year=request.POST['card_expiry_year'],
-                                       card_cvv=request.POST['card_cvv'])
+        card = CardInfo.objects.create(card_num=request.POST.get('card_num', False),
+                                       card_expiry_month=request.POST.get('card_expiry_month', False),
+                                       card_expiry_year=request.POST.get('card_expiry_year', False),
+                                       card_cvv=request.POST.get('card_cvv', False))
 
-        membership = Membership.objects.filter(id=self.request.POST['membership']).first()
+        membership = Membership.objects.filter(id=kwargs['pk']).first()
         UserMembership.objects.create(user=request.user,
                                       membership=membership,
                                       card=card)
@@ -67,7 +67,7 @@ class SubscriptionView(CreateAPIView):
             amount=membership.price,
             card=card)
 
-        return Response({'details': f'successfully subscribed to subscription with id {request.POST["membership"]}'})
+        return Response({'details': f'successfully subscribed to subscription with id {request.POST.get("membership", False)}'})
 
 
 class EditCardInfoView(UpdateAPIView):

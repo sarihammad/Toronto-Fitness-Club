@@ -10,7 +10,7 @@ class Membership(models.Model):
         (30, 'Monthly'),
         (365, 'Yearly')
     )
-
+    id = models.PositiveIntegerField(primary_key=True)
     membership = models.PositiveIntegerField(choices=MEMBERSHIP_FREQUENCY)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     objects = models.Manager()
@@ -36,7 +36,7 @@ class CardInfo(models.Model):
 class UserMembership(models.Model):
     user = models.OneToOneField(UserProfile,
                                 on_delete=models.CASCADE)
-    membership = models.OneToOneField(Membership,
+    membership = models.ForeignKey(Membership,
                                       on_delete=models.CASCADE)
     subscription_date = models.DateTimeField(auto_now_add=True)
 

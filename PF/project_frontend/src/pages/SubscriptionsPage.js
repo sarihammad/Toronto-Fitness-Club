@@ -41,8 +41,6 @@ const SubscriptionsPage = () => {
 
 
     const Card = (props) => (
-        // <Card>
-        //     <Card.Body>
         <div>
                 <div className="subscription_card">
                     <div className="card_data">
@@ -54,7 +52,7 @@ const SubscriptionsPage = () => {
                             <br/>
                             <hr />
                             {localStorage.getItem("authTokens") && (
-                                <Link to={ "/subscriptions/subscribe" }><Button class="subscribe_button">Subscribe</Button></Link>
+                                <Link to={ `/subscriptions/${props.id}/subscribe` }><Button class="subscribe_button">Subscribe</Button></Link>
                             )}
                             {!localStorage.getItem("authTokens") && (
                                 // <NavLink to="/login" state={{ prev: location.pathname }}><Button variant="primary">Subscribe</Button></NavLink>
@@ -73,7 +71,8 @@ const SubscriptionsPage = () => {
           {
             props.cards.map((card) => (
               <Card membership={ card.membership }
-                price={ card.price } />
+                price={ card.price }
+                id={ card.id } />
             ))
           }
         </div>
